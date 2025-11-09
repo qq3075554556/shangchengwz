@@ -1,112 +1,267 @@
-import { Server, Globe, Zap, Shield } from 'lucide-react';
+import { Check } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent, CardHeader } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
 import { useLanguage } from '@/contexts/LanguageContext';
 
 const NodeCenter = () => {
   const { language } = useLanguage();
 
-  const features = [
+  const pricingPlans = [
     {
-      icon: Globe,
-      title: language === 'zh' ? '全球覆盖' : 'Global Coverage',
-      description: language === 'zh' ? '全球多个国家和地区的节点资源' : 'Node resources in multiple countries and regions worldwide',
+      name: language === 'zh' ? 'VPN节点' : 'VPN Node',
+      bandwidth: '200M',
+      package: language === 'zh' ? '套餐' : 'Package',
+      users: language === 'zh' ? '支持同时在线5000人以上' : 'Supports 5000+ concurrent users',
+      price: 'USD$ 500',
+      period: language === 'zh' ? '每个月' : 'Per Month',
+      buttonText: language === 'zh' ? '立即联系' : 'Contact Now',
+      recommended: false,
+      nodes: 10,
+      speed: '200M',
+      features: [
+        language === 'zh' ? '免费配置10个节点' : 'Free 10 nodes',
+        language === 'zh' ? '(全球地区任选)' : '(Global regions)',
+        '',
+        language === 'zh' ? '无限流量' : 'Unlimited traffic',
+        language === 'zh' ? 'VPN专用服务器' : 'Dedicated VPN server',
+        language === 'zh' ? '200M速度专线' : '200M dedicated line',
+        language === 'zh' ? '稳定防封抗�击' : 'Stable & anti-block',
+        language === 'zh' ? '24小时在线支持' : '24/7 online support',
+        language === 'zh' ? '全程包维护与售后' : 'Full maintenance',
+        language === 'zh' ? '中国大陆稳定率99.9%' : 'China 99.9% uptime',
+        '',
+        language === 'zh' ? '支持补差价升级*' : 'Support upgrade*',
+        language === 'zh' ? '支持添加更多节点*' : 'Add more nodes*',
+        language === 'zh' ? '支持动态节点方案*' : 'Dynamic nodes*'
+      ]
     },
     {
-      icon: Zap,
-      title: language === 'zh' ? '高速稳定' : 'High-Speed & Stable',
-      description: language === 'zh' ? '优质线路，保证连接速度和稳定性' : 'Premium routes ensuring connection speed and stability',
+      name: language === 'zh' ? 'VPN节点' : 'VPN Node',
+      bandwidth: '500M',
+      package: language === 'zh' ? '套餐' : 'Package',
+      users: language === 'zh' ? '支持同时在线10000人以上' : 'Supports 10000+ concurrent users',
+      price: 'USD$ 1800',
+      period: language === 'zh' ? '每个月' : 'Per Month',
+      buttonText: language === 'zh' ? '立即咨询' : 'Inquire Now',
+      recommended: true,
+      nodes: 20,
+      speed: '500M',
+      features: [
+        language === 'zh' ? '免费配置20个节点' : 'Free 20 nodes',
+        language === 'zh' ? '(全球地区任选)' : '(Global regions)',
+        '',
+        language === 'zh' ? '无限流量' : 'Unlimited traffic',
+        language === 'zh' ? 'VPN专用服务器' : 'Dedicated VPN server',
+        language === 'zh' ? '500M速度专线' : '500M dedicated line',
+        language === 'zh' ? '稳定防封抗攻击' : 'Stable & anti-block',
+        language === 'zh' ? '24小时在线支持' : '24/7 online support',
+        language === 'zh' ? '全程包维护与售后' : 'Full maintenance',
+        language === 'zh' ? '中国大陆稳定率99.9%' : 'China 99.9% uptime',
+        '',
+        language === 'zh' ? '支持补差价升级*' : 'Support upgrade*',
+        language === 'zh' ? '支持添加更多节点*' : 'Add more nodes*',
+        language === 'zh' ? '支持动态节点方案*' : 'Dynamic nodes*'
+      ]
     },
     {
-      icon: Shield,
-      title: language === 'zh' ? '安全可靠' : 'Secure & Reliable',
-      description: language === 'zh' ? '企业级安全保障，数据加密传输' : 'Enterprise-grade security with encrypted data transmission',
+      name: language === 'zh' ? 'VPN节点' : 'VPN Node',
+      bandwidth: '1000M',
+      package: language === 'zh' ? '套餐' : 'Package',
+      users: language === 'zh' ? '支持同时在线5万人以上' : 'Supports 50000+ concurrent users',
+      price: 'USD$ 3000',
+      period: language === 'zh' ? '每个月' : 'Per Month',
+      buttonText: language === 'zh' ? '立即咨询' : 'Inquire Now',
+      recommended: false,
+      nodes: 30,
+      speed: '1000M',
+      features: [
+        language === 'zh' ? '免费配置30个节点' : 'Free 30 nodes',
+        language === 'zh' ? '(全球地区任选)' : '(Global regions)',
+        '',
+        language === 'zh' ? '无限流量' : 'Unlimited traffic',
+        language === 'zh' ? 'VPN专用服务器' : 'Dedicated VPN server',
+        language === 'zh' ? '1000M速度专线' : '1000M dedicated line',
+        language === 'zh' ? '稳定防封抗攻击' : 'Stable & anti-block',
+        language === 'zh' ? '24小时在线支持' : '24/7 online support',
+        language === 'zh' ? '全程包维护与售后' : 'Full maintenance',
+        language === 'zh' ? '中国大陆稳定率99.9%' : 'China 99.9% uptime',
+        '',
+        language === 'zh' ? '支持补差价升级*' : 'Support upgrade*',
+        language === 'zh' ? '支持添加更多节点*' : 'Add more nodes*',
+        language === 'zh' ? '支持动态节点方案*' : 'Dynamic nodes*'
+      ]
     },
     {
-      icon: Server,
-      title: language === 'zh' ? '弹性扩展' : 'Elastic Scaling',
-      description: language === 'zh' ? '根据需求灵活调整节点配置' : 'Flexible node configuration based on needs',
-    },
+      name: language === 'zh' ? 'VPN节点' : 'VPN Node',
+      bandwidth: '5000M',
+      package: language === 'zh' ? '套餐' : 'Package',
+      users: language === 'zh' ? '支持同时在线10万人以上' : 'Supports 100000+ concurrent users',
+      price: 'USD$ 8800',
+      period: language === 'zh' ? '每个月' : 'Per Month',
+      buttonText: language === 'zh' ? '立即咨询' : 'Inquire Now',
+      recommended: false,
+      nodes: 100,
+      speed: '5000M',
+      features: [
+        language === 'zh' ? '免费配置100个节点' : 'Free 100 nodes',
+        language === 'zh' ? '(全球地区任选)' : '(Global regions)',
+        '',
+        language === 'zh' ? '无限流量' : 'Unlimited traffic',
+        language === 'zh' ? 'VPN专用服务器' : 'Dedicated VPN server',
+        language === 'zh' ? '5000M速度专线' : '5000M dedicated line',
+        language === 'zh' ? '稳定防封抗攻击' : 'Stable & anti-block',
+        language === 'zh' ? '24小时在线支持' : '24/7 online support',
+        language === 'zh' ? '全程包维护与售后' : 'Full maintenance',
+        language === 'zh' ? '中国大陆稳定率99.9%' : 'China 99.9% uptime',
+        '',
+        language === 'zh' ? '支持补差价升级*' : 'Support upgrade*',
+        language === 'zh' ? '支持添加更多节点*' : 'Add more nodes*',
+        language === 'zh' ? '支持动态节点方案*' : 'Dynamic nodes*'
+      ]
+    }
   ];
 
-  const regions = [
-    {
-      name: language === 'zh' ? '亚太地区' : 'Asia Pacific',
-      nodes: language === 'zh' ? '50+ 节点' : '50+ Nodes',
-    },
-    {
-      name: language === 'zh' ? '北美地区' : 'North America',
-      nodes: language === 'zh' ? '30+ 节点' : '30+ Nodes',
-    },
-    {
-      name: language === 'zh' ? '欧洲地区' : 'Europe',
-      nodes: language === 'zh' ? '40+ 节点' : '40+ Nodes',
-    },
-    {
-      name: language === 'zh' ? '其他地区' : 'Other Regions',
-      nodes: language === 'zh' ? '20+ 节点' : '20+ Nodes',
-    },
+  const advantages = [
+    language === 'zh' ? 'VPN专线不限流量：按需开通，弹性扩容' : 'VPN unlimited traffic: On-demand, elastic scaling',
+    language === 'zh' ? '带宽可选 100M-10G：高并发、低时延' : 'Bandwidth 100M-10G: High concurrency, low latency',
+    language === 'zh' ? '免费节点配置：主流协议与策略一站式交付' : 'Free node configuration: One-stop delivery',
+    language === 'zh' ? '全球节点可选：多区域就近接入与容灾' : 'Global nodes: Multi-region access',
+    language === 'zh' ? '稳定抗封与防护：自动健康检测与切换、抗攻击' : 'Stable protection: Auto health check, anti-attack',
+    language === 'zh' ? '7×24 专业运维：工单直连技术团队' : '7×24 support: Direct tech team access',
+    language === 'zh' ? '近一年中国大陆可用率 99.9%*' : 'China uptime 99.9%*'
   ];
 
   return (
-    <div className="min-h-screen pt-24 px-4">
+    <div className="min-h-screen pt-24 px-4 pb-16">
       <div className="container mx-auto">
-        <div className="text-center mb-12">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-primary bg-clip-text text-transparent">
-            {language === 'zh' ? '节点中心' : 'Node Center'}
+        {/* Hero Section */}
+        <div className="text-center mb-16">
+          <h1 className="text-4xl md:text-5xl font-bold mb-4">
+            {language === 'zh' ? 'VPN节点商城' : 'VPN Node Store'}
           </h1>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+          <p className="text-lg text-muted-foreground">
             {language === 'zh' 
-              ? '提供全球高质量节点资源，保障网络连接稳定高速'
-              : 'Providing global high-quality node resources for stable and high-speed network connections'}
+              ? '全球任意地区节点可选，可定制流量。'
+              : 'Global node selection with customizable traffic.'}
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
-          {features.map((feature, index) => (
-            <Card key={index} className="bg-card border-border hover:border-primary/50 transition-all text-center">
-              <CardHeader>
-                <div className="w-12 h-12 rounded-lg bg-gradient-primary flex items-center justify-center mb-4 mx-auto">
-                  <feature.icon className="w-6 h-6 text-primary-foreground" />
+        {/* Pricing Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
+          {pricingPlans.map((plan, index) => (
+            <Card 
+              key={index} 
+              className={`relative ${plan.recommended ? 'bg-muted/30' : 'bg-card'} border-border hover:border-primary/50 transition-all`}
+            >
+              {plan.recommended && (
+                <Badge className="absolute -top-3 left-1/2 -translate-x-1/2 bg-foreground text-background">
+                  {language === 'zh' ? '推荐' : 'Recommended'}
+                </Badge>
+              )}
+              <CardHeader className="text-center pb-4">
+                <div className="w-32 h-32 mx-auto mb-4 rounded-lg bg-muted/50 flex items-center justify-center">
+                  <div className="text-center">
+                    <div className="w-20 h-20 mx-auto mb-2" />
+                  </div>
                 </div>
-                <CardTitle className="text-lg">{feature.title}</CardTitle>
-                <CardDescription>{feature.description}</CardDescription>
+                <h3 className="text-xl font-bold mb-2">{plan.name}</h3>
+                <p className="text-3xl font-bold mb-1">
+                  <span className="text-destructive">{plan.bandwidth}{plan.package}</span>
+                </p>
+                <p className="text-sm text-muted-foreground mb-4">({plan.users})</p>
+                <div className="border-t border-border pt-4">
+                  <p className="text-sm text-muted-foreground mb-1">{plan.period}</p>
+                  <p className="text-3xl font-bold mb-4">{plan.price}</p>
+                  <Button className="w-full bg-foreground text-background hover:bg-foreground/90">
+                    {plan.buttonText}
+                  </Button>
+                </div>
               </CardHeader>
+              <CardContent className="pt-0">
+                <div className="border-t border-border pt-4">
+                  <h4 className="font-bold mb-3">
+                    {language === 'zh' ? '特点：' : 'Features:'}
+                  </h4>
+                  <ul className="space-y-2">
+                    {plan.features.map((feature, idx) => (
+                      <li key={idx} className={`text-sm ${feature === '' ? 'h-2' : ''} ${feature.includes('99.9%') ? 'text-destructive font-semibold' : 'text-muted-foreground'}`}>
+                        {feature}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </CardContent>
             </Card>
           ))}
         </div>
 
-        <Card className="bg-card border-border mb-8">
-          <CardHeader>
-            <CardTitle>{language === 'zh' ? '节点分布' : 'Node Distribution'}</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-              {regions.map((region, index) => (
-                <div key={index} className="p-6 border border-border rounded-lg text-center hover:border-primary/50 transition-all">
-                  <h3 className="text-xl font-semibold mb-2">{region.name}</h3>
-                  <p className="text-2xl font-bold text-primary">{region.nodes}</p>
-                </div>
-              ))}
-            </div>
-          </CardContent>
-        </Card>
-
-        <Card className="bg-gradient-secondary border-border">
-          <CardContent className="p-8 text-center">
-            <h3 className="text-2xl font-bold mb-4">
-              {language === 'zh' ? '需要专属节点？' : 'Need Dedicated Nodes?'}
+        {/* VPN International Line Introduction */}
+        <div className="bg-muted/30 rounded-lg p-8 md:p-12 mb-8">
+          <h2 className="text-3xl font-bold text-center mb-8">
+            {language === 'zh' ? 'VPN国际专线介绍' : 'VPN International Line Introduction'}
+          </h2>
+          
+          <div className="max-w-4xl mx-auto mb-8">
+            <h3 className="text-xl font-bold mb-4">
+              {language === 'zh' ? 'VPN开发王 - 多类型 VPN/VPS线路服务' : 'VPN Development Platform - Multiple VPN/VPS Services'}
             </h3>
-            <p className="text-muted-foreground mb-6">
-              {language === 'zh' 
-                ? '我们可以为您提供定制的专属节点解决方案'
-                : 'We can provide customized dedicated node solutions for you'}
+            <p className="text-muted-foreground leading-relaxed mb-6">
+              {language === 'zh'
+                ? '作为业内领先的 VPN 开发与整体解决方案提供商，我们上线全新线路产品，为个人与企业提供高效、稳定、安全的节点与专线采购/托管服务；根据不同业务场景（跨境办公、出海业务、远程访问、内容分发等）量身定制带宽与策略。'
+                : 'As an industry-leading VPN development and solution provider, we launch new line products to provide individuals and enterprises with efficient, stable, and secure node and dedicated line procurement/hosting services; customized bandwidth and strategies according to different business scenarios.'}
             </p>
-            <Button size="lg" className="bg-gradient-primary">
-              {language === 'zh' ? '联系我们' : 'Contact Us'}
+
+            <h3 className="text-xl font-bold mb-4">
+              {language === 'zh' ? '核心优势' : 'Core Advantages'}
+            </h3>
+            <ul className="space-y-3 mb-8">
+              {advantages.map((advantage, idx) => (
+                <li key={idx} className="flex items-start gap-2">
+                  <Check className="w-5 h-5 text-primary mt-0.5 flex-shrink-0" />
+                  <span className="text-muted-foreground">{advantage}</span>
+                </li>
+              ))}
+            </ul>
+
+            <h3 className="text-xl font-bold mb-4">
+              {language === 'zh' ? '为什么选择我们' : 'Why Choose Us'}
+            </h3>
+            <p className="text-muted-foreground leading-relaxed mb-6">
+              {language === 'zh'
+                ? '即买即用、开箱即上；从规划、部署到运维全托管，减少自建成本与试错时间，助力业务持续增长。'
+                : 'Instant deployment and use; from planning to operation and maintenance, fully managed, reducing self-built costs and trial-and-error time, helping business growth.'}
+            </p>
+
+            <div className="border-t border-border pt-6">
+              <h3 className="text-xl font-bold mb-4">
+                {language === 'zh' ? 'VPN开发王的 VPS 线路商城' : 'VPN Development VPS Line Store'}
+              </h3>
+              <p className="text-muted-foreground leading-relaxed mb-6">
+                {language === 'zh'
+                  ? '致力为您提供优质的 VPN 连接与专线解决方案 ——'
+                  : 'Dedicated to providing you with premium VPN connections and dedicated line solutions —'}
+                <span className="font-bold text-foreground">
+                  {language === 'zh' ? '现在就咨询/开通' : 'Consult/Activate Now'}
+                </span>
+                {language === 'zh'
+                  ? '，获得稳定高速的全球网络能力。'
+                  : ', get stable and high-speed global network capabilities.'}
+              </p>
+              <p className="text-sm text-muted-foreground mb-6">
+                {language === 'zh'
+                  ? '* 可用率为近一年监测数据的统计口径，实际表现以所选区域与网络环境为准。'
+                  : '* Uptime is based on one-year monitoring data, actual performance depends on selected region and network environment.'}
+              </p>
+            </div>
+          </div>
+
+          <div className="text-center">
+            <Button size="lg" className="bg-foreground text-background hover:bg-foreground/90">
+              {language === 'zh' ? '联系客服' : 'Contact Support'}
             </Button>
-          </CardContent>
-        </Card>
+          </div>
+        </div>
       </div>
     </div>
   );
