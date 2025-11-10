@@ -34,72 +34,147 @@ const CustomCenter = () => {
       <div className="container mx-auto">
         <div className="text-center mb-12">
           <h1 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-primary bg-clip-text text-transparent">
-            {language === 'zh' ? '定制中心' : 'Custom Center'}
+            {language === 'zh' ? 'VPN定制开发服务' : 'VPN Custom Development Service'}
           </h1>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
             {language === 'zh' 
-              ? '专业的定制开发服务，将您的想法变为现实'
-              : 'Professional custom development services to turn your ideas into reality'}
+              ? '如果源码和白标还无法满足你的要求，你还可以选择VPN定制开发。'
+              : 'If source code and white label cannot meet your requirements, you can also choose VPN custom development.'}
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
-          {advantages.map((advantage, index) => (
-            <Card key={index} className="bg-card border-border hover:border-primary/50 transition-all text-center">
-              <CardHeader>
-                <div className="w-12 h-12 rounded-lg bg-gradient-primary flex items-center justify-center mb-4 mx-auto">
-                  <advantage.icon className="w-6 h-6 text-primary-foreground" />
-                </div>
-                <CardTitle className="text-lg">{advantage.title}</CardTitle>
-                <CardDescription>{advantage.description}</CardDescription>
-              </CardHeader>
-            </Card>
-          ))}
-        </div>
-
-        <Card className="bg-card border-border mb-8">
+        {/* 定制开发模板 - Template Section at Top */}
+        <Card className="bg-card border-border mb-12">
           <CardHeader>
-            <CardTitle>{language === 'zh' ? '定制流程' : 'Custom Process'}</CardTitle>
+            <CardTitle className="text-2xl text-center">
+              {language === 'zh' ? '定制开发模板' : 'Custom Development Templates'}
+            </CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="space-y-6">
-              {[
-                {
-                  step: '01',
-                  title: language === 'zh' ? '需求沟通' : 'Requirements Discussion',
-                  desc: language === 'zh' ? '详细了解您的需求和期望' : 'Understand your needs and expectations in detail',
-                },
-                {
-                  step: '02',
-                  title: language === 'zh' ? '方案设计' : 'Solution Design',
-                  desc: language === 'zh' ? '制定详细的开发方案和时间表' : 'Create detailed development plan and timeline',
-                },
-                {
-                  step: '03',
-                  title: language === 'zh' ? '开发实施' : 'Development',
-                  desc: language === 'zh' ? '按照方案进行开发，定期反馈进度' : 'Develop according to plan with regular updates',
-                },
-                {
-                  step: '04',
-                  title: language === 'zh' ? '测试交付' : 'Testing & Delivery',
-                  desc: language === 'zh' ? '全面测试后交付，提供后续支持' : 'Deliver after thorough testing with ongoing support',
-                },
-              ].map((item, index) => (
-                <div key={index} className="flex gap-4 items-start">
-                  <div className="text-3xl font-bold text-primary/20">{item.step}</div>
-                  <div>
-                    <h3 className="text-lg font-semibold mb-1">{item.title}</h3>
-                    <p className="text-muted-foreground">{item.desc}</p>
-                  </div>
-                </div>
-              ))}
+            <div className="text-center space-y-6">
+              <h3 className="text-xl font-semibold">
+                {language === 'zh' ? 'VPNKing定制模板' : 'VPNKing Custom Templates'}
+              </h3>
+              <p className="text-muted-foreground">
+                {language === 'zh' 
+                  ? '我们提供专业的定制模板，满足您的各种需求'
+                  : 'We provide professional custom templates to meet your various needs'}
+              </p>
+              <Button size="lg" className="bg-gradient-primary">
+                {language === 'zh' ? '立即咨询客服' : 'Contact Customer Service'}
+              </Button>
             </div>
           </CardContent>
         </Card>
 
-        <div className="text-center">
+        {/* 我们提供什么 Section */}
+        <div className="mb-12">
+          <h2 className="text-3xl font-bold text-center mb-8">
+            {language === 'zh' ? '我们提供什么？' : 'What Do We Provide?'}
+          </h2>
+          <p className="text-center text-lg mb-6 text-muted-foreground">
+            {language === 'zh' 
+              ? '定制系统 | 定制协议 | 定制功能 | 定制设计 | 定制服务'
+              : 'Custom Systems | Custom Protocols | Custom Features | Custom Design | Custom Services'}
+          </p>
+        </div>
+
+        {/* Services Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+          <Card className="bg-card border-border hover:border-primary/50 transition-all">
+            <CardHeader>
+              <CardTitle>{language === 'zh' ? '定制VPN系统' : 'Custom VPN Systems'}</CardTitle>
+              <CardDescription>
+                {language === 'zh' 
+                  ? '支持Window/MacOS/Android/iOS/网页系统'
+                  : 'Support Window/MacOS/Android/iOS/Web Systems'}
+              </CardDescription>
+            </CardHeader>
+          </Card>
+
+          <Card className="bg-card border-border hover:border-primary/50 transition-all">
+            <CardHeader>
+              <CardTitle>{language === 'zh' ? '定制VPN协议' : 'Custom VPN Protocols'}</CardTitle>
+              <CardDescription>
+                {language === 'zh' 
+                  ? '支持OpenVPN/PPTP/IKEv2/L2TP/SS/等协议'
+                  : 'Support OpenVPN/PPTP/IKEv2/L2TP/SS/etc protocols'}
+              </CardDescription>
+            </CardHeader>
+          </Card>
+
+          <Card className="bg-card border-border hover:border-primary/50 transition-all">
+            <CardHeader>
+              <CardTitle>{language === 'zh' ? '定制VPN功能' : 'Custom VPN Features'}</CardTitle>
+              <CardDescription>
+                {language === 'zh' 
+                  ? '支持连接/订阅系统/支付系统/营销系统等'
+                  : 'Support connection/subscription/payment/marketing systems etc'}
+              </CardDescription>
+            </CardHeader>
+          </Card>
+
+          <Card className="bg-card border-border hover:border-primary/50 transition-all">
+            <CardHeader>
+              <CardTitle>{language === 'zh' ? '定制VPN设计' : 'Custom VPN Design'}</CardTitle>
+              <CardDescription>
+                {language === 'zh' 
+                  ? '风格定制/朋克风格/简约风格/流行风格等'
+                  : 'Style customization/Punk/Minimalist/Popular styles etc'}
+              </CardDescription>
+            </CardHeader>
+          </Card>
+
+          <Card className="bg-card border-border hover:border-primary/50 transition-all">
+            <CardHeader>
+              <CardTitle>{language === 'zh' ? '定制VPN技术' : 'Custom VPN Technology'}</CardTitle>
+              <CardDescription>
+                {language === 'zh' 
+                  ? '漏洞检查/技术服务/维护服务/运营服务等'
+                  : 'Vulnerability checks/Technical service/Maintenance/Operations etc'}
+              </CardDescription>
+            </CardHeader>
+          </Card>
+
+          <Card className="bg-card border-border hover:border-primary/50 transition-all">
+            <CardHeader>
+              <CardTitle>{language === 'zh' ? 'VPN开发流程' : 'VPN Development Process'}</CardTitle>
+              <CardDescription>
+                {language === 'zh' 
+                  ? '提供你所需要的开发要求，向客服获取报价和细节后，便可进行付款，付款方式可向客服人员获取，付款完成后将开始开发工作。'
+                  : 'Provide your development requirements, get quotation and details from customer service, then proceed with payment. Payment methods can be obtained from customer service, and development work will begin after payment is completed.'}
+              </CardDescription>
+            </CardHeader>
+          </Card>
+        </div>
+
+        {/* Advantages Section */}
+        <div className="mb-12">
+          <h2 className="text-3xl font-bold text-center mb-8">
+            {language === 'zh' ? '我们的优势' : 'Our Advantages'}
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {advantages.map((advantage, index) => (
+              <Card key={index} className="bg-card border-border hover:border-primary/50 transition-all text-center">
+                <CardHeader>
+                  <div className="w-12 h-12 rounded-lg bg-gradient-primary flex items-center justify-center mb-4 mx-auto">
+                    <advantage.icon className="w-6 h-6 text-primary-foreground" />
+                  </div>
+                  <CardTitle className="text-lg">{advantage.title}</CardTitle>
+                  <CardDescription>{advantage.description}</CardDescription>
+                </CardHeader>
+              </Card>
+            ))}
+          </div>
+        </div>
+
+        {/* CTA Section */}
+        <div className="text-center mb-12">
+          <h3 className="text-2xl font-bold mb-4">
+            {language === 'zh' ? '极速开发 实现梦想' : 'Fast Development, Realize Dreams'}
+          </h3>
           <Button size="lg" className="bg-gradient-primary">
-            {language === 'zh' ? '开始定制' : 'Start Customization'}
+            {language === 'zh' ? '开发咨询' : 'Development Consultation'}
           </Button>
         </div>
       </div>
