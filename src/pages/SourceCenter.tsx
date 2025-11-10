@@ -27,7 +27,7 @@ const SourceCenter = () => {
       price: '800U',
       platforms: 4,
       image: 'https://custom-images.strikinglycdn.com/res/hrscywv4p/image/upload/c_limit,fl_lossy,h_9000,w_1200,f_auto,q_auto/7258853/799543_28394.png',
-      buyLink: 'https://t.me/ximi1688',
+      buyLink: 'https://t.me/gaoshengsm',
     },
     {
       id: 2,
@@ -36,7 +36,7 @@ const SourceCenter = () => {
       price: '800U',
       platforms: 5,
       image: 'https://custom-images.strikinglycdn.com/res/hrscywv4p/image/upload/c_limit,fl_lossy,h_9000,w_1200,f_auto,q_auto/7258853/341578_299053.png',
-      buyLink: 'https://t.me/ximi1688',
+      buyLink: 'https://t.me/gaoshengsm',
     },
     {
       id: 3,
@@ -45,7 +45,7 @@ const SourceCenter = () => {
       price: '1000U',
       platforms: 6,
       image: 'https://custom-images.strikinglycdn.com/res/hrscywv4p/image/upload/c_limit,fl_lossy,h_9000,w_1200,f_auto,q_auto/7258853/787526_29593.png',
-      buyLink: 'https://t.me/ximi1688',
+      buyLink: 'https://t.me/gaoshengsm',
     },
   ];
 
