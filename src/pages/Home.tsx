@@ -2,51 +2,42 @@ import { Code, Palette, Tag, Server, CreditCard, Upload } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { ServiceCard } from '@/components/ServiceCard';
 import { useLanguage } from '@/contexts/LanguageContext';
-
 const Home = () => {
-  const { t } = useLanguage();
-
-  const services = [
-    {
-      title: t('sourceTitle'),
-      description: t('sourceDesc'),
-      icon: Code,
-      link: '/source',
-    },
-    {
-      title: t('customTitle'),
-      description: t('customDesc'),
-      icon: Palette,
-      link: '/custom',
-    },
-    {
-      title: t('whitelabelTitle'),
-      description: t('whitelabelDesc'),
-      icon: Tag,
-      link: '/whitelabel',
-    },
-    {
-      title: t('nodeTitle'),
-      description: t('nodeDesc'),
-      icon: Server,
-      link: '/nodes',
-    },
-    {
-      title: t('paymentTitle'),
-      description: t('paymentDesc'),
-      icon: CreditCard,
-      link: '/payment',
-    },
-    {
-      title: t('listingTitle'),
-      description: t('listingDesc'),
-      icon: Upload,
-      link: '/listing',
-    },
-  ];
-
-  return (
-    <div className="min-h-screen">
+  const {
+    t
+  } = useLanguage();
+  const services = [{
+    title: t('sourceTitle'),
+    description: t('sourceDesc'),
+    icon: Code,
+    link: '/source'
+  }, {
+    title: t('customTitle'),
+    description: t('customDesc'),
+    icon: Palette,
+    link: '/custom'
+  }, {
+    title: t('whitelabelTitle'),
+    description: t('whitelabelDesc'),
+    icon: Tag,
+    link: '/whitelabel'
+  }, {
+    title: t('nodeTitle'),
+    description: t('nodeDesc'),
+    icon: Server,
+    link: '/nodes'
+  }, {
+    title: t('paymentTitle'),
+    description: t('paymentDesc'),
+    icon: CreditCard,
+    link: '/payment'
+  }, {
+    title: t('listingTitle'),
+    description: t('listingDesc'),
+    icon: Upload,
+    link: '/listing'
+  }];
+  return <div className="min-h-screen">
       {/* Hero Section */}
       <section className="relative pt-32 pb-20 px-4">
         <div className="absolute inset-0 bg-gradient-primary opacity-10"></div>
@@ -58,12 +49,8 @@ const Home = () => {
             {t('heroSubtitle')}
           </p>
           <div className="flex gap-4 justify-center flex-wrap">
-            <Button size="lg" className="bg-gradient-primary hover:opacity-90">
-              {t('getStarted')}
-            </Button>
-            <Button size="lg" variant="secondary">
-              {t('learnMore')}
-            </Button>
+            
+            
           </div>
         </div>
       </section>
@@ -75,14 +62,10 @@ const Home = () => {
             {t('services')}
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {services.map((service, index) => (
-              <ServiceCard key={index} {...service} />
-            ))}
+            {services.map((service, index) => <ServiceCard key={index} {...service} />)}
           </div>
         </div>
       </section>
-    </div>
-  );
+    </div>;
 };
-
 export default Home;
