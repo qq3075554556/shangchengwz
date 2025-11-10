@@ -176,49 +176,7 @@ const WhitelabelCenter = () => {
           </div>
         </div>
 
-        {/* Product Specs */}
-        <Card className="bg-card border-border mb-12">
-          <CardContent className="pt-6">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-              {productInfo.specs.map((spec, index) => (
-                <div key={index} className="p-4 border border-border rounded-lg">
-                  <div className="text-sm text-muted-foreground mb-1">{spec.label}</div>
-                  <div className="font-semibold">{spec.value}</div>
-                </div>
-              ))}
-            </div>
-          </CardContent>
-        </Card>
-
-        {/* Advantages Section */}
-        <div className="mb-12">
-          <h2 className="text-3xl font-bold text-center mb-8">
-            {language === 'zh' ? 'VPN白标的优势' : 'VPN White Label Advantages'}
-          </h2>
-          <p className="text-center text-muted-foreground mb-8 max-w-4xl mx-auto">
-            {language === 'zh' 
-              ? '我们的VPN白标计划，小白也可直接运营，提供一站式服务，包括：部署、代收款、节点配置、维护与更新等。永久源码授权、终身免费更新，也可以自行二开源码和上架商店，唯一的局限即只能绑定一个域名（但可向我们申请更换）。'
-              : 'Our VPN white label plan allows even beginners to operate directly, providing one-stop services including: deployment, payment collection, node configuration, maintenance and updates. Permanent source code authorization, lifetime free updates, and you can also develop and list on app stores. The only limitation is that you can only bind one domain name (but you can apply to us for a change).'}
-          </p>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {advantages.map((advantage, index) => (
-              <Card key={index} className="bg-card border-border hover:border-primary/50 transition-all">
-                <CardHeader>
-                  <div className="w-12 h-12 rounded-lg bg-gradient-primary flex items-center justify-center mb-4">
-                    <advantage.icon className="w-6 h-6 text-primary-foreground" />
-                  </div>
-                  <CardTitle className="text-xl">{advantage.title}</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-muted-foreground mb-4">{advantage.description}</p>
-                  <p className="text-sm font-medium">{advantage.benefit}</p>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </div>
-
-        {/* Packages Section */}
+        {/* Packages Section - Moved to Top */}
         <div className="mb-12">
           <h2 className="text-3xl font-bold text-center mb-4">
             {language === 'zh' ? '一站式VPN贴牌套餐' : 'One-Stop VPN White Label Packages'}
@@ -272,6 +230,48 @@ const WhitelabelCenter = () => {
                       {language === 'zh' ? '立即购买' : 'Buy Now'}
                     </a>
                   </Button>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+
+        {/* Product Specs */}
+        <Card className="bg-card border-border mb-12">
+          <CardContent className="pt-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              {productInfo.specs.map((spec, index) => (
+                <div key={index} className="p-4 border border-border rounded-lg">
+                  <div className="text-sm text-muted-foreground mb-1">{spec.label}</div>
+                  <div className="font-semibold">{spec.value}</div>
+                </div>
+              ))}
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* Advantages Section */}
+        <div className="mb-12">
+          <h2 className="text-3xl font-bold text-center mb-8">
+            {language === 'zh' ? 'VPN白标的优势' : 'VPN White Label Advantages'}
+          </h2>
+          <p className="text-center text-muted-foreground mb-8 max-w-4xl mx-auto">
+            {language === 'zh' 
+              ? '我们的VPN白标计划，小白也可直接运营，提供一站式服务，包括：部署、代收款、节点配置、维护与更新等。永久源码授权、终身免费更新，也可以自行二开源码和上架商店，唯一的局限即只能绑定一个域名（但可向我们申请更换）。'
+              : 'Our VPN white label plan allows even beginners to operate directly, providing one-stop services including: deployment, payment collection, node configuration, maintenance and updates. Permanent source code authorization, lifetime free updates, and you can also develop and list on app stores. The only limitation is that you can only bind one domain name (but you can apply to us for a change).'}
+          </p>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {advantages.map((advantage, index) => (
+              <Card key={index} className="bg-card border-border hover:border-primary/50 transition-all">
+                <CardHeader>
+                  <div className="w-12 h-12 rounded-lg bg-gradient-primary flex items-center justify-center mb-4">
+                    <advantage.icon className="w-6 h-6 text-primary-foreground" />
+                  </div>
+                  <CardTitle className="text-xl">{advantage.title}</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-muted-foreground mb-4">{advantage.description}</p>
+                  <p className="text-sm font-medium">{advantage.benefit}</p>
                 </CardContent>
               </Card>
             ))}
