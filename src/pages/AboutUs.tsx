@@ -178,7 +178,7 @@ const AboutUs = () => {
             </p>
             <div className="flex flex-col md:flex-row gap-4 justify-center items-center">
               <div className="text-sm opacity-90">
-                {language === 'zh' ? '电报社群：' : 'Telegram Group: '}t.me/vpndevelop
+                {language === 'zh' ? '邮箱地址：' : 'Telegram Group: '}zhenghongcheng88@gmail.com
               </div>
               <div className="text-sm opacity-90">
                 {language === 'zh' ? '客服联系：' : 'Customer Service: '}t.me/gaoshengsm
