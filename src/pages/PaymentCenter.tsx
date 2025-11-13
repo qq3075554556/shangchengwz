@@ -15,7 +15,7 @@ const PaymentCenter = () => {
         : 'Mainly solves Alipay/WeChat payment collection, connecting to our partnered collection platform for payment collection, including: Alipay collection, WeChat collection, etc. Simplifies payment process, ensures fund security and smooth transaction experience. This method effectively avoids direct risks of traditional payment channels, ensuring your business operations. Suitable for source code/custom development/white label users. White label users can check transaction records and withdrawal records in independent order panel (after activation).',
       note: language === 'zh' ? '（购买了我们的白标计划的用户，可免费接入此服务。）' : '(Users who purchased our white label plan can access this service for free.)',
       buttons: [
-        { text: language === 'zh' ? '进入面板' : 'Enter Panel', link: 'https://pay.vpnking.cc/' },
+        { text: language === 'zh' ? '进入面板' : 'Enter Panel', link: '/fangwencuowu.html' },
         { text: language === 'zh' ? '联系客服' : 'Contact Service', link: 'https://t.me/gaoshengsm' }
       ]
     },
