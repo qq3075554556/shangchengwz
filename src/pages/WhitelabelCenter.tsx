@@ -169,8 +169,8 @@ const WhitelabelCenter = () => {
           </h2>
           <div className="flex justify-center mb-8">
             <Button size="lg" className="bg-gradient-primary" asChild>
-              <a href="https://singlinkvpn.com/" target="_blank" rel="noopener noreferrer">
-                {language === 'zh' ? '查看Demo' : 'View Demo'}
+              <a href="https://t.me/gaoshengsm" target="_blank" rel="noopener noreferrer">
+                {language === 'zh' ? '联系客服' : 'View Demo'}
               </a>
             </Button>
           </div>
