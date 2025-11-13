@@ -208,7 +208,7 @@ const SourceCenter = () => {
           <Button 
             size="lg" 
             variant="outline"
-            onClick={() => window.open('https://www.vpnking.cc/3', '_blank')}
+            onClick={() => window.open('/faq', '_blank')}
           >
             {language === 'zh' ? '查看更多详情' : 'View More Details'}
           </Button>
