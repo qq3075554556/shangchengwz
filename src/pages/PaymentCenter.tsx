@@ -1,7 +1,9 @@
-import { CreditCard, Smartphone, Globe, Shield } from 'lucide-react';
+import { CreditCard, Smartphone, Globe, Shield, PlayCircle, Image as ImageIcon } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { SEO } from '@/components/SEO';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
 const PaymentCenter = () => {
   const { language } = useLanguage();
@@ -66,25 +68,150 @@ const PaymentCenter = () => {
     },
   ];
 
-  return (
-    <div className="min-h-screen pt-24 px-4">
-      <div className="container mx-auto">
-        <div className="text-center mb-12">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-primary bg-clip-text text-transparent">
-            {language === 'zh' ? 'VPN收款解决方案' : 'VPN Payment Solutions'}
-          </h1>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            {language === 'zh' 
-              ? '作为VPN行业的专家，我们还为VPN服务商提供高效、安全的收款解决方案，帮助您顺利开展业务。本方案主要解决支付宝与微信收款的问题，至于Visa、虚拟货币、Paypal等支付网关皆支持VPN收款，因此VPN服务商可以直接接入进行收款。'
-              : 'As VPN industry experts, we provide efficient and secure payment solutions for VPN service providers to help you conduct business smoothly. This solution mainly addresses Alipay and WeChat payment collection issues. For Visa, cryptocurrency, Paypal and other payment gateways that support VPN payments, VPN service providers can directly integrate for collection.'}
-          </p>
-        </div>
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "name": language === 'zh' ? 'VPN收款解决方案' : 'VPN Payment Solutions',
+    "description": language === 'zh' 
+      ? '专业的VPN收款解决方案，支持支付宝、微信支付、Visa、加密货币等多种支付方式，提供代收服务、跳转技术和伪装技术三种解决方案。'
+      : 'Professional VPN payment solutions supporting Alipay, WeChat Pay, Visa, cryptocurrency and more. Offering payment collection services, jump technology and disguise technology.',
+    "provider": {
+      "@type": "Organization",
+      "name": "VPN Payment Center"
+    },
+    "areaServed": "Worldwide",
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": language === 'zh' ? 'VPN收款服务' : 'VPN Payment Services',
+      "itemListElement": paymentSolutions.map((solution, index) => ({
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": solution.title
+        }
+      }))
+    }
+  };
 
-        {/* Payment Solutions */}
-        <div className="space-y-8 mb-12">
-          {paymentSolutions.map((solution, index) => (
-            <Card key={index} className="bg-card border-border">
-              <CardContent className="pt-8">
+  return (
+    <>
+      <SEO 
+        title={language === 'zh' ? 'VPN收款中心 - 专业VPN支付解决方案 | 支付宝微信收款' : 'VPN Payment Center - Professional VPN Payment Solutions | Alipay WeChat'}
+        description={language === 'zh' 
+          ? '专业VPN收款解决方案，支持支付宝、微信支付、PayPal、Visa、加密货币等多种支付方式。提供代收服务、跳转技术和伪装技术，确保VPN业务安全稳定收款。'
+          : 'Professional VPN payment solutions supporting Alipay, WeChat Pay, PayPal, Visa, and cryptocurrency. Offering collection services, jump technology and disguise technology for secure VPN business payments.'}
+        keywords={language === 'zh' 
+          ? 'VPN收款,VPN支付,支付宝收款,微信收款,VPN代收,VPN支付解决方案,加密货币支付,Visa收款,PayPal收款'
+          : 'VPN payment,VPN collection,Alipay payment,WeChat Pay,VPN payment gateway,cryptocurrency payment,Visa payment,PayPal payment'}
+        canonical={typeof window !== 'undefined' ? window.location.href : ''}
+        structuredData={structuredData}
+      />
+      <main className="min-h-screen pt-24 px-4">
+        <div className="container mx-auto">
+          <header className="text-center mb-12">
+            <h1 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-primary bg-clip-text text-transparent">
+              {language === 'zh' ? 'VPN收款解决方案' : 'VPN Payment Solutions'}
+            </h1>
+            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+              {language === 'zh' 
+                ? '作为VPN行业的专家，我们还为VPN服务商提供高效、安全的收款解决方案，帮助您顺利开展业务。本方案主要解决支付宝与微信收款的问题，至于Visa、虚拟货币、Paypal等支付网关皆支持VPN收款，因此VPN服务商可以直接接入进行收款。'
+                : 'As VPN industry experts, we provide efficient and secure payment solutions for VPN service providers to help you conduct business smoothly. This solution mainly addresses Alipay and WeChat payment collection issues. For Visa, cryptocurrency, Paypal and other payment gateways that support VPN payments, VPN service providers can directly integrate for collection.'}
+            </p>
+          </header>
+
+          {/* Demo Section */}
+          <section className="mb-16" aria-labelledby="demo-section">
+            <h2 id="demo-section" className="text-3xl font-bold text-center mb-8">
+              {language === 'zh' ? '方案演示' : 'Solution Demonstration'}
+            </h2>
+            <Card className="bg-card border-border overflow-hidden">
+              <CardContent className="p-0">
+                <Tabs defaultValue="screenshots" className="w-full">
+                  <TabsList className="w-full grid grid-cols-2 rounded-none border-b border-border">
+                    <TabsTrigger value="screenshots" className="rounded-none">
+                      <ImageIcon className="w-4 h-4 mr-2" />
+                      {language === 'zh' ? '界面截图' : 'Screenshots'}
+                    </TabsTrigger>
+                    <TabsTrigger value="video" className="rounded-none">
+                      <PlayCircle className="w-4 h-4 mr-2" />
+                      {language === 'zh' ? '演示视频' : 'Demo Video'}
+                    </TabsTrigger>
+                  </TabsList>
+                  
+                  <TabsContent value="screenshots" className="p-6 mt-0">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      <div className="space-y-4">
+                        <div className="aspect-video bg-muted rounded-lg flex items-center justify-center border border-border">
+                          <div className="text-center space-y-2">
+                            <ImageIcon className="w-12 h-12 mx-auto text-muted-foreground" />
+                            <p className="text-sm text-muted-foreground">
+                              {language === 'zh' ? '支付界面示例' : 'Payment Interface Example'}
+                            </p>
+                          </div>
+                        </div>
+                        <p className="text-sm text-muted-foreground text-center">
+                          {language === 'zh' ? '用户端支付界面，支持多种支付方式' : 'User payment interface supporting multiple payment methods'}
+                        </p>
+                      </div>
+                      
+                      <div className="space-y-4">
+                        <div className="aspect-video bg-muted rounded-lg flex items-center justify-center border border-border">
+                          <div className="text-center space-y-2">
+                            <ImageIcon className="w-12 h-12 mx-auto text-muted-foreground" />
+                            <p className="text-sm text-muted-foreground">
+                              {language === 'zh' ? '管理后台示例' : 'Admin Panel Example'}
+                            </p>
+                          </div>
+                        </div>
+                        <p className="text-sm text-muted-foreground text-center">
+                          {language === 'zh' ? '商户管理后台，实时查看交易数据和提现记录' : 'Merchant admin panel for real-time transaction data and withdrawal records'}
+                        </p>
+                      </div>
+                    </div>
+                    <div className="mt-6 p-4 bg-muted/50 rounded-lg">
+                      <p className="text-sm text-muted-foreground text-center">
+                        {language === 'zh' 
+                          ? '💡 提示：联系客服获取完整演示截图和详细使用说明' 
+                          : '💡 Tip: Contact customer service for complete demo screenshots and detailed instructions'}
+                      </p>
+                    </div>
+                  </TabsContent>
+                  
+                  <TabsContent value="video" className="p-6 mt-0">
+                    <div className="aspect-video bg-muted rounded-lg flex items-center justify-center border border-border">
+                      <div className="text-center space-y-4">
+                        <PlayCircle className="w-16 h-16 mx-auto text-muted-foreground" />
+                        <div>
+                          <p className="text-lg font-semibold mb-2">
+                            {language === 'zh' ? '演示视频' : 'Demo Video'}
+                          </p>
+                          <p className="text-sm text-muted-foreground mb-4">
+                            {language === 'zh' 
+                              ? '完整的操作流程演示，包括支付接入、订单管理、资金提现等功能' 
+                              : 'Complete operation demo including payment integration, order management, fund withdrawal and more'}
+                          </p>
+                          <Button variant="outline" asChild>
+                            <a href="https://t.me/gaoshengsm" target="_blank" rel="noopener noreferrer">
+                              {language === 'zh' ? '联系客服获取视频' : 'Contact for Video'}
+                            </a>
+                          </Button>
+                        </div>
+                      </div>
+                    </div>
+                  </TabsContent>
+                </Tabs>
+              </CardContent>
+            </Card>
+          </section>
+
+          {/* Payment Solutions */}
+          <section className="space-y-8 mb-12" aria-labelledby="solutions-section">
+            <h2 id="solutions-section" className="sr-only">
+              {language === 'zh' ? '收款解决方案详情' : 'Payment Solution Details'}
+            </h2>
+            {paymentSolutions.map((solution, index) => (
+              <article key={index} className="bg-card border-border rounded-lg border">
+                <div className="pt-8 px-6 pb-6">
                 <h2 className="text-3xl font-bold text-center mb-6">
                   {language === 'zh' ? 'VPN收款解决方案' : 'VPN Payment Solution'}·{solution.number}
                 </h2>
@@ -119,53 +246,59 @@ const PaymentCenter = () => {
                     </Button>
                   ))}
                 </div>
+              </div>
+            </article>
+          ))}
+          </section>
+
+          <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12" aria-labelledby="features-section">
+            <h2 id="features-section" className="sr-only">
+              {language === 'zh' ? '核心功能特性' : 'Core Features'}
+            </h2>
+            {features.map((feature, index) => (
+              <Card key={index} className="bg-card border-border hover:border-primary/50 transition-all text-center">
+                <CardHeader>
+                  <div className="w-12 h-12 rounded-lg bg-gradient-primary flex items-center justify-center mb-4 mx-auto" role="img" aria-label={feature.title}>
+                    <feature.icon className="w-6 h-6 text-primary-foreground" />
+                  </div>
+                  <CardTitle className="text-lg">{feature.title}</CardTitle>
+                  <CardDescription>{feature.description}</CardDescription>
+                </CardHeader>
+              </Card>
+            ))}
+          </section>
+
+          <section aria-labelledby="payment-methods-section">
+            <Card className="bg-card border-border mb-8">
+              <CardHeader>
+                <CardTitle id="payment-methods-section">{language === 'zh' ? '支持的支付方式' : 'Supported Payment Methods'}</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                  {[
+                    language === 'zh' ? '支付宝' : 'Alipay',
+                    language === 'zh' ? '微信支付' : 'WeChat Pay',
+                    'PayPal',
+                    'Stripe',
+                    'VISA',
+                    'Mastercard',
+                    language === 'zh' ? '银联' : 'UnionPay',
+                    language === 'zh' ? '加密货币' : 'Cryptocurrency',
+                  ].map((method, index) => (
+                    <div key={index} className="p-4 border border-border rounded-lg text-center hover:border-primary/50 transition-all" role="listitem">
+                      <p className="font-semibold">{method}</p>
+                    </div>
+                  ))}
+                </div>
               </CardContent>
             </Card>
-          ))}
-        </div>
+          </section>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
-          {features.map((feature, index) => (
-            <Card key={index} className="bg-card border-border hover:border-primary/50 transition-all text-center">
+          <section aria-labelledby="integration-process-section">
+            <Card className="bg-card border-border">
               <CardHeader>
-                <div className="w-12 h-12 rounded-lg bg-gradient-primary flex items-center justify-center mb-4 mx-auto">
-                  <feature.icon className="w-6 h-6 text-primary-foreground" />
-                </div>
-                <CardTitle className="text-lg">{feature.title}</CardTitle>
-                <CardDescription>{feature.description}</CardDescription>
+                <CardTitle id="integration-process-section">{language === 'zh' ? '接入流程' : 'Integration Process'}</CardTitle>
               </CardHeader>
-            </Card>
-          ))}
-        </div>
-
-        <Card className="bg-card border-border mb-8">
-          <CardHeader>
-            <CardTitle>{language === 'zh' ? '支持的支付方式' : 'Supported Payment Methods'}</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-              {[
-                language === 'zh' ? '支付宝' : 'Alipay',
-                language === 'zh' ? '微信支付' : 'WeChat Pay',
-                'PayPal',
-                'Stripe',
-                'VISA',
-                'Mastercard',
-                language === 'zh' ? '银联' : 'UnionPay',
-                language === 'zh' ? '加密货币' : 'Cryptocurrency',
-              ].map((method, index) => (
-                <div key={index} className="p-4 border border-border rounded-lg text-center hover:border-primary/50 transition-all">
-                  <p className="font-semibold">{method}</p>
-                </div>
-              ))}
-            </div>
-          </CardContent>
-        </Card>
-
-        <Card className="bg-card border-border">
-          <CardHeader>
-            <CardTitle>{language === 'zh' ? '接入流程' : 'Integration Process'}</CardTitle>
-          </CardHeader>
           <CardContent>
             <div className="space-y-4">
               {[
@@ -201,16 +334,18 @@ const PaymentCenter = () => {
             </div>
           </CardContent>
         </Card>
+          </section>
 
-        <div className="text-center mt-12">
-          <Button size="lg" className="bg-gradient-primary" asChild>
-            <a href="https://t.me/gaoshengsm" target="_blank" rel="noopener noreferrer">
-              {language === 'zh' ? '立即接入' : 'Integrate Now'}
-            </a>
-          </Button>
+          <div className="text-center mt-12">
+            <Button size="lg" className="bg-gradient-primary" asChild>
+              <a href="https://t.me/gaoshengsm" target="_blank" rel="noopener noreferrer">
+                {language === 'zh' ? '立即接入' : 'Integrate Now'}
+              </a>
+            </Button>
+          </div>
         </div>
-      </div>
-    </div>
+      </main>
+    </>
   );
 };
 
