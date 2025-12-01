@@ -3,6 +3,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { SEO } from '@/components/SEO';
 
 const NodeCenter = () => {
   const { language } = useLanguage();
@@ -132,77 +133,119 @@ const NodeCenter = () => {
     language === 'zh' ? '近一年中国大陆可用率 99.9%*' : 'China uptime 99.9%*'
   ];
 
-  return (
-    <div className="min-h-screen pt-24 px-4 pb-16">
-      <div className="container mx-auto">
-        {/* Hero Section */}
-        <div className="text-center mb-16">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">
-            {language === 'zh' ? 'VPN节点商城' : 'VPN Node Store'}
-          </h1>
-          <p className="text-lg text-muted-foreground">
-            {language === 'zh' 
-              ? '全球任意地区节点可选，可定制流量。'
-              : 'Global node selection with customizable traffic.'}
-          </p>
-        </div>
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "Store",
+    "name": language === 'zh' ? 'VPN节点商城' : 'VPN Node Store',
+    "description": language === 'zh'
+      ? '专业VPN节点服务，提供200M到5000M带宽套餐，全球任意地区节点可选，稳定率99.9%，支持5000到10万人同时在线，7×24专业运维。'
+      : 'Professional VPN node service offering 200M to 5000M bandwidth packages, global node selection, 99.9% uptime, supporting 5000 to 100000 concurrent users with 7×24 professional support.',
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": language === 'zh' ? 'VPN节点套餐' : 'VPN Node Packages',
+      "itemListElement": pricingPlans.map((plan, index) => ({
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": `${plan.bandwidth} ${plan.package}`
+        },
+        "price": plan.price.replace('USD$ ', ''),
+        "priceCurrency": "USD"
+      }))
+    }
+  };
 
-        {/* Pricing Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
-          {pricingPlans.map((plan, index) => (
-            <Card 
-              key={index} 
-              className={`relative ${plan.recommended ? 'bg-muted/30' : 'bg-card'} border-border hover:border-primary/50 transition-all`}
-            >
-              {plan.recommended && (
-                <Badge className="absolute -top-3 left-1/2 -translate-x-1/2 bg-foreground text-background">
-                  {language === 'zh' ? '推荐' : 'Recommended'}
-                </Badge>
-              )}
-              <CardHeader className="text-center pb-4">
-                <div className="w-32 h-32 mx-auto mb-4 rounded-lg bg-muted/50 flex items-center justify-center">
-                  <div className="text-center">
-                    <div className="w-20 h-20 mx-auto mb-2" />
+  return (
+    <>
+      <SEO 
+        title={language === 'zh' ? 'VPN节点商城 - 全球VPN专线节点 | 200M-5000M带宽套餐' : 'VPN Node Store - Global VPN Dedicated Nodes | 200M-5000M Bandwidth Packages'}
+        description={language === 'zh' 
+          ? 'VPN节点商城提供专业VPN国际专线服务，200M-5000M带宽可选，全球任意地区节点配置，稳定率99.9%，支持5000到10万人同时在线，无限流量，7×24专业运维，抗攻击防封。'
+          : 'VPN Node Store offers professional VPN international dedicated line service, 200M-5000M bandwidth options, global node configuration, 99.9% uptime, supporting 5000-100000 concurrent users, unlimited traffic, 7×24 support, anti-attack protection.'}
+        keywords={language === 'zh' 
+          ? 'VPN节点,VPN专线,VPN国际线路,VPN带宽,全球节点,VPN服务器,VPN线路商城,稳定VPN节点'
+          : 'VPN nodes,VPN dedicated line,VPN international line,VPN bandwidth,global nodes,VPN servers,VPN line store,stable VPN nodes'}
+        canonical={typeof window !== 'undefined' ? window.location.href : ''}
+        structuredData={structuredData}
+      />
+      <main className="min-h-screen pt-24 px-4 pb-16">
+        <div className="container mx-auto">
+          {/* Hero Section */}
+          <header className="text-center mb-16">
+            <h1 className="text-4xl md:text-5xl font-bold mb-4">
+              {language === 'zh' ? 'VPN节点商城' : 'VPN Node Store'}
+            </h1>
+            <p className="text-lg text-muted-foreground">
+              {language === 'zh' 
+                ? '全球任意地区节点可选，可定制流量。'
+                : 'Global node selection with customizable traffic.'}
+            </p>
+          </header>
+
+          {/* Pricing Cards */}
+          <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16" aria-labelledby="pricing-section">
+            <h2 id="pricing-section" className="sr-only">
+              {language === 'zh' ? 'VPN节点价格套餐' : 'VPN Node Pricing Packages'}
+            </h2>
+            {pricingPlans.map((plan, index) => (
+              <article 
+                key={index} 
+                className={`relative ${plan.recommended ? 'bg-muted/30' : 'bg-card'} border-border hover:border-primary/50 transition-all rounded-lg border`}
+                itemScope
+                itemType="https://schema.org/Product"
+              >
+                {plan.recommended && (
+                  <Badge className="absolute -top-3 left-1/2 -translate-x-1/2 bg-foreground text-background">
+                    {language === 'zh' ? '推荐' : 'Recommended'}
+                  </Badge>
+                )}
+                <div className="text-center pb-4 p-6">
+                  <div className="w-32 h-32 mx-auto mb-4 rounded-lg bg-muted/50 flex items-center justify-center">
+                    <div className="text-center">
+                      <div className="w-20 h-20 mx-auto mb-2" />
+                    </div>
+                  </div>
+                  <h3 className="text-xl font-bold mb-2" itemProp="name">{plan.name}</h3>
+                  <p className="text-3xl font-bold mb-1">
+                    <span className="text-destructive">{plan.bandwidth}{plan.package}</span>
+                  </p>
+                  <p className="text-sm text-muted-foreground mb-4">({plan.users})</p>
+                  <div className="border-t border-border pt-4">
+                    <p className="text-sm text-muted-foreground mb-1">{plan.period}</p>
+                    <div className="text-3xl font-bold mb-4" itemProp="offers" itemScope itemType="https://schema.org/Offer">
+                      <span itemProp="price">{plan.price.replace('USD$ ', '')}</span>
+                      <meta itemProp="priceCurrency" content="USD" />
+                    </div>
+                    <Button className="w-full bg-foreground text-background hover:bg-foreground/90" asChild>
+                      <a href="https://t.me/gaoshengsm" target="_blank" rel="noopener noreferrer">
+                        {plan.buttonText}
+                      </a>
+                    </Button>
                   </div>
                 </div>
-                <h3 className="text-xl font-bold mb-2">{plan.name}</h3>
-                <p className="text-3xl font-bold mb-1">
-                  <span className="text-destructive">{plan.bandwidth}{plan.package}</span>
-                </p>
-                <p className="text-sm text-muted-foreground mb-4">({plan.users})</p>
-                <div className="border-t border-border pt-4">
-                  <p className="text-sm text-muted-foreground mb-1">{plan.period}</p>
-                  <p className="text-3xl font-bold mb-4">{plan.price}</p>
-                  <Button className="w-full bg-foreground text-background hover:bg-foreground/90" asChild>
-                    <a href="https://t.me/gaoshengsm" target="_blank" rel="noopener noreferrer">
-                      {plan.buttonText}
-                    </a>
-                  </Button>
+                <div className="pt-0 p-6">
+                  <div className="border-t border-border pt-4">
+                    <h4 className="font-bold mb-3">
+                      {language === 'zh' ? '特点：' : 'Features:'}
+                    </h4>
+                    <ul className="space-y-2">
+                      {plan.features.map((feature, idx) => (
+                        <li key={idx} className={`text-sm ${feature === '' ? 'h-2' : ''} ${feature.includes('99.9%') ? 'text-destructive font-semibold' : 'text-muted-foreground'}`}>
+                          {feature}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
                 </div>
-              </CardHeader>
-              <CardContent className="pt-0">
-                <div className="border-t border-border pt-4">
-                  <h4 className="font-bold mb-3">
-                    {language === 'zh' ? '特点：' : 'Features:'}
-                  </h4>
-                  <ul className="space-y-2">
-                    {plan.features.map((feature, idx) => (
-                      <li key={idx} className={`text-sm ${feature === '' ? 'h-2' : ''} ${feature.includes('99.9%') ? 'text-destructive font-semibold' : 'text-muted-foreground'}`}>
-                        {feature}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
+              </article>
+            ))}
+          </section>
 
-        {/* VPN International Line Introduction */}
-        <div className="bg-muted/30 rounded-lg p-8 md:p-12 mb-8">
-          <h2 className="text-3xl font-bold text-center mb-8">
-            {language === 'zh' ? 'VPN国际专线介绍' : 'VPN International Line Introduction'}
-          </h2>
+          {/* VPN International Line Introduction */}
+          <section className="bg-muted/30 rounded-lg p-8 md:p-12 mb-8" aria-labelledby="introduction-section">
+            <h2 id="introduction-section" className="text-3xl font-bold text-center mb-8">
+              {language === 'zh' ? 'VPN国际专线介绍' : 'VPN International Line Introduction'}
+            </h2>
           
           <div className="max-w-4xl mx-auto mb-8">
             <h3 className="text-xl font-bold mb-4">
@@ -265,9 +308,10 @@ const NodeCenter = () => {
               </a>
             </Button>
           </div>
+          </section>
         </div>
-      </div>
-    </div>
+      </main>
+    </>
   );
 };
 

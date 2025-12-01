@@ -3,6 +3,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { SEO } from '@/components/SEO';
 
 const WhitelabelCenter = () => {
   const { language } = useLanguage();
@@ -154,87 +155,122 @@ const WhitelabelCenter = () => {
     },
   ];
 
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": "SingLink VPN®️",
+    "description": language === 'zh' 
+      ? 'VPN白标授权套餐，提供终身授权、全协议支持、管理面板、技术支持等一站式服务。1999美金起即可开启VPN运营。'
+      : 'VPN White Label License Package with lifetime authorization, full protocol support, management panel, technical support and more. Start VPN operations from $1999.',
+    "brand": {
+      "@type": "Brand",
+      "name": "SingLink VPN"
+    },
+    "offers": {
+      "@type": "AggregateOffer",
+      "lowPrice": "1999",
+      "highPrice": "5999",
+      "priceCurrency": "USD",
+      "offerCount": packages.length
+    }
+  };
+
   return (
-    <div className="min-h-screen pt-24 px-4">
-      <div className="container mx-auto">
-        {/* Product Header */}
-        <div className="text-center mb-12">
-          <h1 className="text-5xl md:text-6xl font-bold mb-4">
-            <span className="bg-gradient-primary bg-clip-text text-transparent">
-              {productInfo.title}
-            </span>
-          </h1>
-          <h2 className="text-2xl md:text-3xl font-semibold mb-6 text-foreground">
-            {productInfo.subtitle}
-          </h2>
-          <div className="flex justify-center mb-8">
-            <Button size="lg" className="bg-gradient-primary" asChild>
-              <a href="https://t.me/gaoshengsm" target="_blank" rel="noopener noreferrer">
-                {language === 'zh' ? '联系客服' : 'View Demo'}
-              </a>
-            </Button>
-          </div>
-        </div>
+    <>
+      <SEO 
+        title={language === 'zh' ? 'VPN白标套餐 - SingLink VPN®️授权 | 终身授权低至1999美金' : 'VPN White Label - SingLink VPN®️ License | Lifetime License from $1999'}
+        description={language === 'zh' 
+          ? 'VPN白标授权套餐，SingLink VPN®️终身授权，支持全协议、提供管理面板、免费部署、代收款服务、节点配置等一站式服务。1999美金起即可开启VPN运营，省钱省心省时，小白也能轻松运营。'
+          : 'VPN White Label License Package, SingLink VPN®️ lifetime authorization with full protocol support, management panel, free deployment, payment collection, node configuration and more. Start VPN operations from $1999. Save money, worry-free, time-saving, easy for beginners.'}
+        keywords={language === 'zh' 
+          ? 'VPN白标,VPN授权,SingLink VPN,VPN贴牌,VPN白标套餐,VPN创业,VPN运营,终身授权,0首付VPN'
+          : 'VPN white label,VPN license,SingLink VPN,VPN branding,VPN white label package,VPN startup,VPN operation,lifetime license,zero down payment VPN'}
+        canonical={typeof window !== 'undefined' ? window.location.href : ''}
+        structuredData={structuredData}
+      />
+      <main className="min-h-screen pt-24 px-4">
+        <div className="container mx-auto">
+          {/* Product Header */}
+          <header className="text-center mb-12">
+            <h1 className="text-5xl md:text-6xl font-bold mb-4">
+              <span className="bg-gradient-primary bg-clip-text text-transparent">
+                {productInfo.title}
+              </span>
+            </h1>
+            <h2 className="text-2xl md:text-3xl font-semibold mb-6 text-foreground">
+              {productInfo.subtitle}
+            </h2>
+            <div className="flex justify-center mb-8">
+              <Button size="lg" className="bg-gradient-primary" asChild>
+                <a href="https://t.me/gaoshengsm" target="_blank" rel="noopener noreferrer">
+                  {language === 'zh' ? '联系客服' : 'View Demo'}
+                </a>
+              </Button>
+            </div>
+          </header>
 
-        {/* Packages Section - Moved to Top */}
-        <div className="mb-12">
-          <h2 className="text-3xl font-bold text-center mb-4">
-            {language === 'zh' ? '一站式VPN贴牌套餐' : 'One-Stop VPN White Label Packages'}
-          </h2>
-          <p className="text-center text-muted-foreground mb-8">
-            {language === 'zh' 
-              ? '官网仅支持USDT付款（如需公司转账, 支付宝转账，请联系客服获取。）'
-              : 'Official website only supports USDT payment (Contact customer service for company transfer or Alipay transfer.)'}
-          </p>
+          {/* Packages Section - Moved to Top */}
+          <section id="packages" aria-labelledby="packages-section">
+            <h2 id="packages-section" className="text-3xl font-bold text-center mb-4">
+              {language === 'zh' ? '一站式VPN贴牌套餐' : 'One-Stop VPN White Label Packages'}
+            </h2>
+            <p className="text-center text-muted-foreground mb-8">
+              {language === 'zh' 
+                ? '官网仅支持USDT付款（如需公司转账, 支付宝转账，请联系客服获取。）'
+                : 'Official website only supports USDT payment (Contact customer service for company transfer or Alipay transfer.)'}
+            </p>
 
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            {packages.map((pkg, index) => (
-              <Card key={index} className={`bg-card border-border hover:border-primary/50 transition-all relative ${pkg.popular ? 'border-primary shadow-glow' : ''}`}>
-                {pkg.popular && (
-                  <Badge className="absolute -top-3 left-1/2 -translate-x-1/2 bg-gradient-primary">
-                    {language === 'zh' ? '热门' : 'Popular'}
-                  </Badge>
-                )}
-                <CardHeader>
-                  <img src={pkg.image} alt={pkg.title} className="w-full h-48 object-cover rounded-lg mb-4" />
-                  <div className="text-sm text-muted-foreground mb-2">{pkg.subtitle}</div>
-                  <CardTitle className="text-xl mb-2">{pkg.title}</CardTitle>
-                  <div className="text-3xl font-bold text-primary mb-2">{pkg.price}</div>
-                  <div className="text-sm text-muted-foreground mb-4">{pkg.platforms}</div>
-                </CardHeader>
-                <CardContent>
-                  <div className="mb-6">
-                    <h4 className="font-semibold mb-3">{language === 'zh' ? '套餐内容：' : 'Package Content:'}</h4>
-                    <ul className="space-y-2">
-                      {pkg.features.map((feature, idx) => (
-                        <li key={idx} className="flex items-start gap-2 text-sm">
-                          <Check className="w-4 h-4 text-primary mt-0.5 flex-shrink-0" />
-                          <span>{feature}</span>
-                        </li>
-                      ))}
-                    </ul>
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8" itemScope itemType="https://schema.org/ItemList">
+              {packages.map((pkg, index) => (
+                <article key={index} className={`bg-card border-border hover:border-primary/50 transition-all relative rounded-lg border ${pkg.popular ? 'border-primary shadow-glow' : ''}`} itemScope itemProp="itemListElement" itemType="https://schema.org/Product">
+                  {pkg.popular && (
+                    <Badge className="absolute -top-3 left-1/2 -translate-x-1/2 bg-gradient-primary">
+                      {language === 'zh' ? '热门' : 'Popular'}
+                    </Badge>
+                  )}
+                  <div className="p-6">
+                    <img src={pkg.image} alt={pkg.title} className="w-full h-48 object-cover rounded-lg mb-4" itemProp="image" />
+                    <div className="text-sm text-muted-foreground mb-2">{pkg.subtitle}</div>
+                    <h3 className="text-xl mb-2 font-bold" itemProp="name">{pkg.title}</h3>
+                    <div className="text-3xl font-bold text-primary mb-2" itemProp="offers" itemScope itemType="https://schema.org/Offer">
+                      <span itemProp="price">{pkg.price.replace(' USD', '')}</span>
+                      <meta itemProp="priceCurrency" content="USD" />
+                    </div>
+                    <div className="text-sm text-muted-foreground mb-4">{pkg.platforms}</div>
                   </div>
-                  <div className="mb-6">
-                    <h4 className="font-semibold mb-3">{language === 'zh' ? '额外服务：' : 'Extra Services:'}</h4>
-                    <ul className="space-y-2">
-                      {pkg.extras.map((extra, idx) => (
-                        <li key={idx} className="flex items-start gap-2 text-sm text-primary">
-                          <Check className="w-4 h-4 text-primary mt-0.5 flex-shrink-0" />
-                          <span className="font-medium">{extra}</span>
-                        </li>
-                      ))}
-                    </ul>
+                  <div className="p-6 pt-0">
+                    <div className="mb-6">
+                      <h4 className="font-semibold mb-3">{language === 'zh' ? '套餐内容：' : 'Package Content:'}</h4>
+                      <ul className="space-y-2">
+                        {pkg.features.map((feature, idx) => (
+                          <li key={idx} className="flex items-start gap-2 text-sm">
+                            <Check className="w-4 h-4 text-primary mt-0.5 flex-shrink-0" />
+                            <span>{feature}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                    <div className="mb-6">
+                      <h4 className="font-semibold mb-3">{language === 'zh' ? '额外服务：' : 'Extra Services:'}</h4>
+                      <ul className="space-y-2">
+                        {pkg.extras.map((extra, idx) => (
+                          <li key={idx} className="flex items-start gap-2 text-sm text-primary">
+                            <Check className="w-4 h-4 text-primary mt-0.5 flex-shrink-0" />
+                            <span className="font-medium">{extra}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                    <Button className="w-full bg-gradient-primary" size="lg" asChild>
+                      <a href="https://t.me/gaoshengsm" target="_blank" rel="noopener noreferrer">
+                        {language === 'zh' ? '立即购买' : 'Buy Now'}
+                      </a>
+                    </Button>
                   </div>
-                  <Button className="w-full bg-gradient-primary" size="lg" asChild>
-                    <a href="https://t.me/gaoshengsm" target="_blank" rel="noopener noreferrer">
-                      {language === 'zh' ? '立即购买' : 'Buy Now'}
-                    </a>
-                  </Button>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </div>
+                </article>
+              ))}
+            </div>
+          </section>
 
         {/* Product Specs */}
         <Card className="bg-card border-border mb-12">
@@ -286,8 +322,9 @@ const WhitelabelCenter = () => {
             </a>
           </Button>
         </div>
-      </div>
-    </div>
+        </div>
+      </main>
+    </>
   );
 };
 

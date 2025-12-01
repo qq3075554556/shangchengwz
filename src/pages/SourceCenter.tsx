@@ -4,6 +4,7 @@ import { Badge } from '@/components/ui/badge';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { CheckCircle2 } from 'lucide-react';
+import { SEO } from '@/components/SEO';
 
 const SourceCenter = () => {
   const { language } = useLanguage();
@@ -81,74 +82,124 @@ const SourceCenter = () => {
     },
   ];
 
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "Store",
+    "name": language === 'zh' ? 'VPN现成源码商城' : 'VPN Ready Source Code Mall',
+    "description": language === 'zh' 
+      ? '专业VPN源码商城，提供OpenVPN、V2ray、机场多协议等完整VPN源码包，支持直接部署、商用和二次开发。10年VPN开发经验，7*24技术支持。'
+      : 'Professional VPN source code store offering OpenVPN, V2ray, multi-protocol airport complete packages. Direct deployment, commercial use, and secondary development supported. 10 years VPN development experience with 7*24 technical support.',
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": language === 'zh' ? 'VPN源码产品' : 'VPN Source Code Products',
+      "itemListElement": sourcePackages.map((pkg, index) => ({
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Product",
+          "name": pkg.title,
+          "image": pkg.image,
+          "offers": {
+            "@type": "Offer",
+            "price": pkg.price.replace('U', ''),
+            "priceCurrency": "USD"
+          }
+        }
+      }))
+    }
+  };
+
   return (
-    <div className="min-h-screen pt-24 px-4">
-      <div className="container mx-auto">
-        <div className="text-center mb-12">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-primary bg-clip-text text-transparent">
-            {language === 'zh' ? 'VPN现成源码商城' : 'VPN Ready Source Code Mall'}
-          </h1>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            {language === 'zh' 
-              ? '我们拥有多款现成完整的VPN源码包，支持自行直接部署使用、商用、二次开发等，即买即用。'
-              : 'We have multiple ready-made complete VPN source code packages that support direct deployment, commercial use, secondary development, etc. Buy and use immediately.'}
-          </p>
-        </div>
+    <>
+      <SEO 
+        title={language === 'zh' ? 'VPN源码商城 - OpenVPN/V2ray源码包 | 专业VPN开发' : 'VPN Source Code Mall - OpenVPN/V2ray Packages | Professional VPN Development'}
+        description={language === 'zh' 
+          ? '专业VPN源码商城，提供OpenVPN、V2ray、机场多协议等完整VPN源码包，支持直接部署、商用和二次开发。10年VPN开发经验，新加坡正规公司，7*24技术支持，即买即用。'
+          : 'Professional VPN source code store offering complete OpenVPN, V2ray, multi-protocol packages. Direct deployment, commercial use, secondary development. 10 years experience, legitimate Singapore company, 7*24 support, instant delivery.'}
+        keywords={language === 'zh' 
+          ? 'VPN源码,OpenVPN源码,V2ray源码,机场源码,VPN开发,VPN源码商城,VPN源码包,VPN二次开发'
+          : 'VPN source code,OpenVPN source,V2ray source,airport source code,VPN development,VPN source mall,VPN packages,VPN secondary development'}
+        canonical={typeof window !== 'undefined' ? window.location.href : ''}
+        structuredData={structuredData}
+      />
+      <main className="min-h-screen pt-24 px-4">
+        <div className="container mx-auto">
+          <header className="text-center mb-12">
+            <h1 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-primary bg-clip-text text-transparent">
+              {language === 'zh' ? 'VPN现成源码商城' : 'VPN Ready Source Code Mall'}
+            </h1>
+            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+              {language === 'zh' 
+                ? '我们拥有多款现成完整的VPN源码包，支持自行直接部署使用、商用、二次开发等，即买即用。'
+                : 'We have multiple ready-made complete VPN source code packages that support direct deployment, commercial use, secondary development, etc. Buy and use immediately.'}
+            </p>
+          </header>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
-          {features.map((feature, index) => (
-            <Card key={index} className="bg-card border-border hover:border-primary/50 transition-all text-center">
-              <CardContent className="pt-6">
-                <CheckCircle2 className="w-12 h-12 mx-auto mb-4 text-primary" />
-                <p className="text-lg font-semibold">{feature.text}</p>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
+          <section className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16" aria-labelledby="features-section">
+            <h2 id="features-section" className="sr-only">
+              {language === 'zh' ? '核心特色' : 'Core Features'}
+            </h2>
+            {features.map((feature, index) => (
+              <Card key={index} className="bg-card border-border hover:border-primary/50 transition-all text-center">
+                <CardContent className="pt-6">
+                  <CheckCircle2 className="w-12 h-12 mx-auto mb-4 text-primary" />
+                  <p className="text-lg font-semibold">{feature.text}</p>
+                </CardContent>
+              </Card>
+            ))}
+          </section>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-16">
-          {sourcePackages.map((pkg) => (
-            <Card key={pkg.id} className="bg-card border-border overflow-hidden hover:border-primary/50 transition-all">
-              <div className="aspect-video overflow-hidden">
-                <img 
-                  src={pkg.image} 
-                  alt={pkg.title}
-                  className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
-                />
-              </div>
-              <CardContent className="p-6">
-                <h3 className="text-xl font-bold mb-2">{pkg.title}</h3>
-                <p className="text-sm text-muted-foreground mb-4">
-                  {language === 'zh' ? '现成源码' : 'Ready Source'}({pkg.date})
-                </p>
-                <div className="mb-4">
-                  <span className="text-2xl font-bold text-foreground">{language === 'zh' ? '价格：' : 'Price: '}</span>
-                  <span className="text-2xl font-bold text-foreground">{pkg.price}</span>
-                  {!pkg.isConsultation && (
-                    <span className="text-sm text-muted-foreground ml-2">
-                      {language === 'zh' ? `/一端（共${pkg.platforms}端）` : `/per platform (${pkg.platforms} total)`}
-                    </span>
-                  )}
+          <section className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-16" aria-labelledby="products-section">
+            <h2 id="products-section" className="sr-only">
+              {language === 'zh' ? '源码产品' : 'Source Code Products'}
+            </h2>
+            {sourcePackages.map((pkg) => (
+              <article key={pkg.id} className="bg-card border-border overflow-hidden hover:border-primary/50 transition-all rounded-lg border" itemScope itemType="https://schema.org/Product">
+                <div className="aspect-video overflow-hidden">
+                  <img 
+                    src={pkg.image} 
+                    alt={pkg.title}
+                    itemProp="image"
+                    className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                  />
                 </div>
-                <Button 
-                  size="lg" 
-                  className="w-full"
-                  variant={pkg.isConsultation ? "outline" : "default"}
-                  onClick={() => window.open(pkg.buyLink, '_blank')}
-                >
-                  {pkg.isConsultation 
-                    ? (language === 'zh' ? '立即咨询' : 'Contact Now')
-                    : (language === 'zh' ? '购买源码' : 'Buy Source Code')
-                  }
-                </Button>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
+                <div className="p-6">
+                  <h3 className="text-xl font-bold mb-2" itemProp="name">{pkg.title}</h3>
+                  <p className="text-sm text-muted-foreground mb-4">
+                    {language === 'zh' ? '现成源码' : 'Ready Source'}({pkg.date})
+                  </p>
+                  <div className="mb-4" itemProp="offers" itemScope itemType="https://schema.org/Offer">
+                    <span className="text-2xl font-bold text-foreground">{language === 'zh' ? '价格：' : 'Price: '}</span>
+                    <span className="text-2xl font-bold text-foreground" itemProp="price">{pkg.price}</span>
+                    <meta itemProp="priceCurrency" content="USD" />
+                    {!pkg.isConsultation && (
+                      <span className="text-sm text-muted-foreground ml-2">
+                        {language === 'zh' ? `/一端（共${pkg.platforms}端）` : `/per platform (${pkg.platforms} total)`}
+                      </span>
+                    )}
+                  </div>
+                  <Button 
+                    size="lg" 
+                    className="w-full"
+                    variant={pkg.isConsultation ? "outline" : "default"}
+                    onClick={() => window.open(pkg.buyLink, '_blank')}
+                  >
+                    {pkg.isConsultation 
+                      ? (language === 'zh' ? '立即咨询' : 'Contact Now')
+                      : (language === 'zh' ? '购买源码' : 'Buy Source Code')
+                    }
+                  </Button>
+                </div>
+              </article>
+            ))}
+          </section>
 
-        <Card className="bg-card border-border mb-16">
-          <CardContent className="p-8">
-            <div className="space-y-4 text-muted-foreground">
+          <section aria-labelledby="terms-section">
+            <Card className="bg-card border-border mb-16">
+              <CardContent className="p-8">
+                <h2 id="terms-section" className="text-2xl font-bold mb-6">
+                  {language === 'zh' ? '购买须知' : 'Purchase Terms'}
+                </h2>
+                <div className="space-y-4 text-muted-foreground">
               <p className="text-destructive font-semibold">
                 {language === 'zh' 
                   ? '首款仅支持USDT付款（如需公司转账、支付宝转账，请联系客服取。）'
@@ -179,42 +230,46 @@ const SourceCenter = () => {
                   ? '发货：源码自动发送至你的邮箱，源码包含：登陆/订阅/连接功能/前端后台/管理面板。'
                   : 'Delivery: Source code will be automatically sent to your email, including: login/subscription/connection functions/frontend and backend/management panel.'}
               </p>
+                </div>
+              </CardContent>
+            </Card>
+          </section>
+
+          <section aria-labelledby="faq-section">
+            <h2 id="faq-section" className="text-3xl font-bold text-center mb-8">
+              {language === 'zh' ? '常见问题' : 'FAQ'}
+            </h2>
+            <p className="text-center text-muted-foreground mb-8">
+              {language === 'zh' ? '在源码商场遇到的常见问题。' : 'Common questions about the source code marketplace.'}
+            </p>
+            <div itemScope itemType="https://schema.org/FAQPage">
+              <Accordion type="single" collapsible className="max-w-3xl mx-auto">
+                {faqItems.map((item, index) => (
+                  <AccordionItem key={index} value={`item-${index}`} itemScope itemProp="mainEntity" itemType="https://schema.org/Question">
+                    <AccordionTrigger className="text-left text-lg font-semibold">
+                      <span itemProp="name">{item.question}</span>
+                    </AccordionTrigger>
+                    <AccordionContent className="text-muted-foreground" itemScope itemProp="acceptedAnswer" itemType="https://schema.org/Answer">
+                      <span itemProp="text">{item.answer}</span>
+                    </AccordionContent>
+                  </AccordionItem>
+                ))}
+              </Accordion>
             </div>
-          </CardContent>
-        </Card>
+          </section>
 
-        <div className="mb-16">
-          <h2 className="text-3xl font-bold text-center mb-8">
-            {language === 'zh' ? '常见问题' : 'FAQ'}
-          </h2>
-          <p className="text-center text-muted-foreground mb-8">
-            {language === 'zh' ? '在源码商场遇到的常见问题。' : 'Common questions about the source code marketplace.'}
-          </p>
-          <Accordion type="single" collapsible className="max-w-3xl mx-auto">
-            {faqItems.map((item, index) => (
-              <AccordionItem key={index} value={`item-${index}`}>
-                <AccordionTrigger className="text-left text-lg font-semibold">
-                  {item.question}
-                </AccordionTrigger>
-                <AccordionContent className="text-muted-foreground">
-                  {item.answer}
-                </AccordionContent>
-              </AccordionItem>
-            ))}
-          </Accordion>
+          <div className="text-center mt-12">
+            <Button 
+              size="lg" 
+              variant="outline"
+              onClick={() => window.open('/faq', '_blank')}
+            >
+              {language === 'zh' ? '查看更多详情' : 'View More Details'}
+            </Button>
+          </div>
         </div>
-
-        <div className="text-center">
-          <Button 
-            size="lg" 
-            variant="outline"
-            onClick={() => window.open('/faq', '_blank')}
-          >
-            {language === 'zh' ? '查看更多详情' : 'View More Details'}
-          </Button>
-        </div>
-      </div>
-    </div>
+      </main>
+    </>
   );
 };
 
