@@ -4,6 +4,9 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { useLanguage } from '@/contexts/LanguageContext';
 import { SEO } from '@/components/SEO';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Breadcrumbs } from '@/components/Breadcrumbs';
+import paymentInterfaceImg from '@/assets/payment-interface.png';
+import adminDashboardImg from '@/assets/admin-dashboard.jpg';
 
 const PaymentCenter = () => {
   const { language } = useLanguage();
@@ -106,7 +109,8 @@ const PaymentCenter = () => {
         canonical={typeof window !== 'undefined' ? window.location.href : ''}
         structuredData={structuredData}
       />
-      <main className="min-h-screen pt-24 px-4">
+      <Breadcrumbs />
+      <main className="min-h-screen px-4">
         <div className="container mx-auto">
           <header className="text-center mb-12">
             <h1 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-primary bg-clip-text text-transparent">
@@ -141,13 +145,12 @@ const PaymentCenter = () => {
                   <TabsContent value="screenshots" className="p-6 mt-0">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                       <div className="space-y-4">
-                        <div className="aspect-video bg-muted rounded-lg flex items-center justify-center border border-border">
-                          <div className="text-center space-y-2">
-                            <ImageIcon className="w-12 h-12 mx-auto text-muted-foreground" />
-                            <p className="text-sm text-muted-foreground">
-                              {language === 'zh' ? '支付界面示例' : 'Payment Interface Example'}
-                            </p>
-                          </div>
+                        <div className="aspect-video bg-muted rounded-lg overflow-hidden border border-border">
+                          <img 
+                            src={paymentInterfaceImg} 
+                            alt={language === 'zh' ? '支付界面示例 - 支持支付宝、微信、加密货币等多种支付方式' : 'Payment Interface Example - Supporting Alipay, WeChat, Cryptocurrency and more'}
+                            className="w-full h-full object-cover object-top"
+                          />
                         </div>
                         <p className="text-sm text-muted-foreground text-center">
                           {language === 'zh' ? '用户端支付界面，支持多种支付方式' : 'User payment interface supporting multiple payment methods'}
@@ -155,13 +158,12 @@ const PaymentCenter = () => {
                       </div>
                       
                       <div className="space-y-4">
-                        <div className="aspect-video bg-muted rounded-lg flex items-center justify-center border border-border">
-                          <div className="text-center space-y-2">
-                            <ImageIcon className="w-12 h-12 mx-auto text-muted-foreground" />
-                            <p className="text-sm text-muted-foreground">
-                              {language === 'zh' ? '管理后台示例' : 'Admin Panel Example'}
-                            </p>
-                          </div>
+                        <div className="aspect-video bg-muted rounded-lg overflow-hidden border border-border">
+                          <img 
+                            src={adminDashboardImg} 
+                            alt={language === 'zh' ? '管理后台示例 - 实时查看用户数据和交易记录' : 'Admin Panel Example - Real-time user data and transaction records'}
+                            className="w-full h-full object-cover object-top"
+                          />
                         </div>
                         <p className="text-sm text-muted-foreground text-center">
                           {language === 'zh' ? '商户管理后台，实时查看交易数据和提现记录' : 'Merchant admin panel for real-time transaction data and withdrawal records'}
@@ -171,33 +173,28 @@ const PaymentCenter = () => {
                     <div className="mt-6 p-4 bg-muted/50 rounded-lg">
                       <p className="text-sm text-muted-foreground text-center">
                         {language === 'zh' 
-                          ? '💡 提示：联系客服获取完整演示截图和详细使用说明' 
-                          : '💡 Tip: Contact customer service for complete demo screenshots and detailed instructions'}
+                          ? '💡 提示：联系客服获取更多演示截图和详细使用说明' 
+                          : '💡 Tip: Contact customer service for more demo screenshots and detailed instructions'}
                       </p>
                     </div>
                   </TabsContent>
                   
                   <TabsContent value="video" className="p-6 mt-0">
-                    <div className="aspect-video bg-muted rounded-lg flex items-center justify-center border border-border">
-                      <div className="text-center space-y-4">
-                        <PlayCircle className="w-16 h-16 mx-auto text-muted-foreground" />
-                        <div>
-                          <p className="text-lg font-semibold mb-2">
-                            {language === 'zh' ? '演示视频' : 'Demo Video'}
-                          </p>
-                          <p className="text-sm text-muted-foreground mb-4">
-                            {language === 'zh' 
-                              ? '完整的操作流程演示，包括支付接入、订单管理、资金提现等功能' 
-                              : 'Complete operation demo including payment integration, order management, fund withdrawal and more'}
-                          </p>
-                          <Button variant="outline" asChild>
-                            <a href="https://t.me/gaoshengsm" target="_blank" rel="noopener noreferrer">
-                              {language === 'zh' ? '联系客服获取视频' : 'Contact for Video'}
-                            </a>
-                          </Button>
-                        </div>
-                      </div>
+                    <div className="aspect-video bg-muted rounded-lg overflow-hidden border border-border">
+                      <video 
+                        controls 
+                        className="w-full h-full object-contain"
+                        poster={paymentInterfaceImg}
+                      >
+                        <source src="/videos/payment-demo.webm" type="video/webm" />
+                        {language === 'zh' ? '您的浏览器不支持视频播放' : 'Your browser does not support video playback'}
+                      </video>
                     </div>
+                    <p className="text-sm text-muted-foreground text-center mt-4">
+                      {language === 'zh' 
+                        ? '完整的操作流程演示，包括支付接入、订单管理、资金提现等功能' 
+                        : 'Complete operation demo including payment integration, order management, fund withdrawal and more'}
+                    </p>
                   </TabsContent>
                 </Tabs>
               </CardContent>
