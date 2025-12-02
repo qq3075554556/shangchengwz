@@ -3,6 +3,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { SEO } from '@/components/SEO';
+import { Breadcrumbs } from '@/components/Breadcrumbs';
 
 const CustomCenter = () => {
   const { language } = useLanguage();
@@ -57,7 +58,8 @@ const CustomCenter = () => {
         canonical={typeof window !== 'undefined' ? window.location.href : ''}
         structuredData={structuredData}
       />
-      <main className="min-h-screen pt-24 px-4">
+      <Breadcrumbs />
+      <main className="min-h-screen pt-4 px-4">
         <div className="container mx-auto">
           <header className="text-center mb-12">
             <h1 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-primary bg-clip-text text-transparent">

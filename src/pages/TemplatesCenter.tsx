@@ -3,6 +3,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { Breadcrumbs } from '@/components/Breadcrumbs';
 
 const TemplatesCenter = () => {
   const { language } = useLanguage();
@@ -71,9 +72,11 @@ const TemplatesCenter = () => {
   ];
 
   return (
-    <div className="min-h-screen pt-24 px-4">
-      <div className="container mx-auto">
-        <div className="mb-12">
+    <>
+      <Breadcrumbs />
+      <div className="min-h-screen pt-4 px-4">
+        <div className="container mx-auto">
+          <div className="mb-12">
           <h2 className="text-3xl font-bold mb-6">
             {language === 'zh' ? '精选模板' : 'Featured Templates'}
           </h2>
@@ -204,6 +207,7 @@ const TemplatesCenter = () => {
         </Card>
       </div>
     </div>
+    </>
   );
 };
 

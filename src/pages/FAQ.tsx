@@ -1,6 +1,7 @@
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { Breadcrumbs } from '@/components/Breadcrumbs';
 
 const FAQ = () => {
   const { language } = useLanguage();
@@ -81,9 +82,11 @@ const FAQ = () => {
   ];
 
   return (
-    <div className="min-h-screen pt-24 px-4">
-      <div className="container mx-auto max-w-4xl">
-        <div className="text-center mb-12">
+    <>
+      <Breadcrumbs />
+      <div className="min-h-screen pt-4 px-4">
+        <div className="container mx-auto max-w-4xl">
+          <div className="text-center mb-12">
           <h1 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-primary bg-clip-text text-transparent">
             {language === 'zh' ? '常见问答' : 'FAQ'}
           </h1>
@@ -117,6 +120,7 @@ const FAQ = () => {
         </Card>
       </div>
     </div>
+    </>
   );
 };
 

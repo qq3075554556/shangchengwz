@@ -5,6 +5,7 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/
 import { useLanguage } from '@/contexts/LanguageContext';
 import { CheckCircle2 } from 'lucide-react';
 import { SEO } from '@/components/SEO';
+import { Breadcrumbs } from '@/components/Breadcrumbs';
 
 const SourceCenter = () => {
   const { language } = useLanguage();
@@ -121,7 +122,8 @@ const SourceCenter = () => {
         canonical={typeof window !== 'undefined' ? window.location.href : ''}
         structuredData={structuredData}
       />
-      <main className="min-h-screen pt-24 px-4">
+      <Breadcrumbs />
+      <main className="min-h-screen pt-4 px-4">
         <div className="container mx-auto">
           <header className="text-center mb-12">
             <h1 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-primary bg-clip-text text-transparent">
