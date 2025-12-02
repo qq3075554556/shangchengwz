@@ -4,6 +4,7 @@ import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { SEO } from '@/components/SEO';
+import { Breadcrumbs } from '@/components/Breadcrumbs';
 
 const NodeCenter = () => {
   const { language } = useLanguage();
@@ -168,7 +169,8 @@ const NodeCenter = () => {
         canonical={typeof window !== 'undefined' ? window.location.href : ''}
         structuredData={structuredData}
       />
-      <main className="min-h-screen pt-24 px-4 pb-16">
+      <Breadcrumbs />
+      <main className="min-h-screen pt-4 px-4 pb-16">
         <div className="container mx-auto">
           {/* Hero Section */}
           <header className="text-center mb-16">

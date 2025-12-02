@@ -4,6 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { SEO } from '@/components/SEO';
+import { Breadcrumbs } from '@/components/Breadcrumbs';
 
 const WhitelabelCenter = () => {
   const { language } = useLanguage();
@@ -188,7 +189,8 @@ const WhitelabelCenter = () => {
         canonical={typeof window !== 'undefined' ? window.location.href : ''}
         structuredData={structuredData}
       />
-      <main className="min-h-screen pt-24 px-4">
+      <Breadcrumbs />
+      <main className="min-h-screen pt-4 px-4">
         <div className="container mx-auto">
           {/* Product Header */}
           <header className="text-center mb-12">

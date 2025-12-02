@@ -1,6 +1,7 @@
 import { Building2, Users, Target, Award, Globe, Shield } from 'lucide-react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { Breadcrumbs } from '@/components/Breadcrumbs';
 
 const AboutUs = () => {
   const { language } = useLanguage();
@@ -48,10 +49,12 @@ const AboutUs = () => {
   ];
 
   return (
-    <div className="min-h-screen pt-24 px-4">
-      <div className="container mx-auto">
-        {/* Hero Section */}
-        <div className="text-center mb-16">
+    <>
+      <Breadcrumbs />
+      <div className="min-h-screen pt-4 px-4">
+        <div className="container mx-auto">
+          {/* Hero Section */}
+          <div className="text-center mb-16">
           <h1 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-primary bg-clip-text text-transparent">
             {language === 'zh' ? '关于我们' : 'About Us'}
           </h1>
@@ -197,6 +200,7 @@ const AboutUs = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 

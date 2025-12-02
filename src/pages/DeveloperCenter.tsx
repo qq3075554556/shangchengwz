@@ -2,6 +2,7 @@ import { Code, Smartphone, Chrome, MessageSquare } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { Breadcrumbs } from '@/components/Breadcrumbs';
 
 const DeveloperCenter = () => {
   const { language } = useLanguage();
@@ -34,9 +35,11 @@ const DeveloperCenter = () => {
   ];
 
   return (
-    <div className="min-h-screen pt-24 px-4">
-      <div className="container mx-auto">
-        <div className="text-center mb-12">
+    <>
+      <Breadcrumbs />
+      <div className="min-h-screen pt-4 px-4">
+        <div className="container mx-auto">
+          <div className="text-center mb-12">
           <h1 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-primary bg-clip-text text-transparent">
             {language === 'zh' ? '开发者账号中心' : 'Developer Account Center'}
           </h1>
@@ -124,6 +127,7 @@ const DeveloperCenter = () => {
         </Card>
       </div>
     </div>
+    </>
   );
 };
 
