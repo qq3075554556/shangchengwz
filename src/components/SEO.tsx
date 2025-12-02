@@ -6,7 +6,7 @@ interface SEOProps {
   keywords?: string;
   ogImage?: string;
   canonical?: string;
-  structuredData?: object;
+  structuredData?: object | object[];
 }
 
 export const SEO = ({ 
@@ -66,13 +66,17 @@ export const SEO = ({
 
     // Structured Data (JSON-LD)
     if (structuredData) {
-      let script = document.querySelector('script[type="application/ld+json"]') as HTMLScriptElement;
-      if (!script) {
-        script = document.createElement('script');
+      // Remove existing scripts
+      document.querySelectorAll('script[type="application/ld+json"]').forEach(el => el.remove());
+      
+      // Handle array of structured data
+      const dataArray = Array.isArray(structuredData) ? structuredData : [structuredData];
+      dataArray.forEach((data) => {
+        const script = document.createElement('script');
         script.type = 'application/ld+json';
+        script.textContent = JSON.stringify(data);
         document.head.appendChild(script);
-      }
-      script.textContent = JSON.stringify(structuredData);
+      });
     }
   }, [title, description, keywords, ogImage, canonical, structuredData]);
 

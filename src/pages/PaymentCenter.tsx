@@ -5,6 +5,7 @@ import { useLanguage } from '@/contexts/LanguageContext';
 import { SEO } from '@/components/SEO';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Breadcrumbs } from '@/components/Breadcrumbs';
+import { ImageLightbox } from '@/components/ImageLightbox';
 import paymentInterfaceImg from '@/assets/payment-interface.png';
 import adminDashboardImg from '@/assets/admin-dashboard.jpg';
 
@@ -71,30 +72,81 @@ const PaymentCenter = () => {
     },
   ];
 
-  const structuredData = {
-    "@context": "https://schema.org",
-    "@type": "Service",
-    "name": language === 'zh' ? 'VPN收款解决方案' : 'VPN Payment Solutions',
-    "description": language === 'zh' 
-      ? '专业的VPN收款解决方案，支持支付宝、微信支付、Visa、加密货币等多种支付方式，提供代收服务、跳转技术和伪装技术三种解决方案。'
-      : 'Professional VPN payment solutions supporting Alipay, WeChat Pay, Visa, cryptocurrency and more. Offering payment collection services, jump technology and disguise technology.',
-    "provider": {
-      "@type": "Organization",
-      "name": "VPN Payment Center"
+  const faqData = [
+    {
+      question: language === 'zh' ? 'VPN收款服务支持哪些支付方式？' : 'What payment methods does VPN payment service support?',
+      answer: language === 'zh' ? '我们支持支付宝、微信支付、PayPal、Stripe、VISA、Mastercard、银联、加密货币等多种支付方式。' : 'We support Alipay, WeChat Pay, PayPal, Stripe, VISA, Mastercard, UnionPay, cryptocurrency and more.'
     },
-    "areaServed": "Worldwide",
-    "hasOfferCatalog": {
-      "@type": "OfferCatalog",
-      "name": language === 'zh' ? 'VPN收款服务' : 'VPN Payment Services',
-      "itemListElement": paymentSolutions.map((solution, index) => ({
-        "@type": "Offer",
-        "itemOffered": {
-          "@type": "Service",
-          "name": solution.title
+    {
+      question: language === 'zh' ? '代收服务和跳转技术有什么区别？' : 'What is the difference between collection service and jump technology?',
+      answer: language === 'zh' ? '代收服务是通过我们合作的平台代为收款，而跳转技术是帮助您在必要时自动切换收款渠道，降低风险。' : 'Collection service collects payments through our partnered platforms, while jump technology helps you automatically switch payment channels when necessary to reduce risks.'
+    },
+    {
+      question: language === 'zh' ? '接入收款服务需要多长时间？' : 'How long does it take to integrate payment service?',
+      answer: language === 'zh' ? '一般情况下，从注册到开始收款只需1-3个工作日，具体取决于您选择的方案和配置复杂度。' : 'Generally, it takes only 1-3 business days from registration to start collecting, depending on the plan you choose and configuration complexity.'
+    },
+    {
+      question: language === 'zh' ? '收款资金安全吗？' : 'Is the payment fund safe?',
+      answer: language === 'zh' ? '完全安全。我们的平台通过PCI DSS认证，采用银行级加密技术，确保您的资金安全。' : 'Completely safe. Our platform is PCI DSS certified and uses bank-level encryption technology to ensure your fund security.'
+    }
+  ];
+
+  const structuredData = [
+    {
+      "@context": "https://schema.org",
+      "@type": "Service",
+      "name": language === 'zh' ? 'VPN收款解决方案' : 'VPN Payment Solutions',
+      "description": language === 'zh' 
+        ? '专业的VPN收款解决方案，支持支付宝、微信支付、Visa、加密货币等多种支付方式，提供代收服务、跳转技术和伪装技术三种解决方案。'
+        : 'Professional VPN payment solutions supporting Alipay, WeChat Pay, Visa, cryptocurrency and more. Offering payment collection services, jump technology and disguise technology.',
+      "provider": {
+        "@type": "Organization",
+        "name": "VPN Payment Center"
+      },
+      "areaServed": "Worldwide",
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": language === 'zh' ? 'VPN收款服务' : 'VPN Payment Services',
+        "itemListElement": paymentSolutions.map((solution) => ({
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": solution.title
+          }
+        }))
+      }
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": language === 'zh' ? 'VPN收款中心' : 'VPN Payment Center',
+      "url": typeof window !== 'undefined' ? window.location.origin : '',
+      "logo": typeof window !== 'undefined' ? `${window.location.origin}/favicon.ico` : '',
+      "description": language === 'zh' 
+        ? '专业VPN行业收款解决方案提供商，提供安全、稳定、高效的支付服务。'
+        : 'Professional VPN industry payment solution provider, offering secure, stable, and efficient payment services.',
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "contactType": "customer service",
+        "url": "https://t.me/gaoshengsm"
+      },
+      "sameAs": [
+        "https://t.me/gaoshengsm"
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": faqData.map(faq => ({
+        "@type": "Question",
+        "name": faq.question,
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": faq.answer
         }
       }))
     }
-  };
+  ];
 
   return (
     <>
@@ -146,27 +198,27 @@ const PaymentCenter = () => {
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                       <div className="space-y-4">
                         <div className="aspect-video bg-muted rounded-lg overflow-hidden border border-border">
-                          <img 
+                          <ImageLightbox 
                             src={paymentInterfaceImg} 
                             alt={language === 'zh' ? '支付界面示例 - 支持支付宝、微信、加密货币等多种支付方式' : 'Payment Interface Example - Supporting Alipay, WeChat, Cryptocurrency and more'}
                             className="w-full h-full object-cover object-top"
                           />
                         </div>
                         <p className="text-sm text-muted-foreground text-center">
-                          {language === 'zh' ? '用户端支付界面，支持多种支付方式' : 'User payment interface supporting multiple payment methods'}
+                          {language === 'zh' ? '点击图片查看大图 - 用户端支付界面' : 'Click image to enlarge - User payment interface'}
                         </p>
                       </div>
                       
                       <div className="space-y-4">
                         <div className="aspect-video bg-muted rounded-lg overflow-hidden border border-border">
-                          <img 
+                          <ImageLightbox 
                             src={adminDashboardImg} 
                             alt={language === 'zh' ? '管理后台示例 - 实时查看用户数据和交易记录' : 'Admin Panel Example - Real-time user data and transaction records'}
                             className="w-full h-full object-cover object-top"
                           />
                         </div>
                         <p className="text-sm text-muted-foreground text-center">
-                          {language === 'zh' ? '商户管理后台，实时查看交易数据和提现记录' : 'Merchant admin panel for real-time transaction data and withdrawal records'}
+                          {language === 'zh' ? '点击图片查看大图 - 商户管理后台' : 'Click image to enlarge - Merchant admin panel'}
                         </p>
                       </div>
                     </div>
