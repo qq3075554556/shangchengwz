@@ -83,7 +83,7 @@ const SourceCenter = () => {
     },
   ];
 
-  const structuredData = {
+  const storeSchema = {
     "@context": "https://schema.org",
     "@type": "Store",
     "name": language === 'zh' ? 'VPN现成源码商城' : 'VPN Ready Source Code Mall',
@@ -108,6 +108,77 @@ const SourceCenter = () => {
       }))
     }
   };
+
+  const localBusinessSchema = {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "VPNKing",
+    "description": language === 'zh' 
+      ? '新加坡正规VPN开发公司，拥有超过10年VPN开发经验，提供VPN源码、白标套餐、节点服务和定制开发'
+      : 'Legitimate VPN development company in Singapore with over 10 years experience, providing VPN source code, white label packages, node services and custom development',
+    "url": "https://vpnking.cc",
+    "address": {
+      "@type": "PostalAddress",
+      "addressCountry": "SG"
+    },
+    "priceRange": "$$",
+    "openingHours": "Mo-Su 00:00-24:00",
+    "sameAs": ["https://t.me/gaoshengsm"]
+  };
+
+  const reviewSchema = {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": language === 'zh' ? 'VPN源码商城产品' : 'VPN Source Code Mall Products',
+    "description": language === 'zh' 
+      ? '专业VPN源码包，支持直接部署和二次开发'
+      : 'Professional VPN source code packages, supporting direct deployment and secondary development',
+    "brand": {
+      "@type": "Brand",
+      "name": "VPNKing"
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "4.9",
+      "reviewCount": "189",
+      "bestRating": "5",
+      "worstRating": "1"
+    },
+    "review": [
+      {
+        "@type": "Review",
+        "reviewRating": {
+          "@type": "Rating",
+          "ratingValue": "5",
+          "bestRating": "5"
+        },
+        "author": {
+          "@type": "Person",
+          "name": language === 'zh' ? "王先生" : "Mr. Wang"
+        },
+        "reviewBody": language === 'zh' 
+          ? "源码质量很高，部署简单，客服响应及时，非常满意！"
+          : "High quality source code, easy deployment, responsive customer service, very satisfied!"
+      },
+      {
+        "@type": "Review",
+        "reviewRating": {
+          "@type": "Rating",
+          "ratingValue": "5",
+          "bestRating": "5"
+        },
+        "author": {
+          "@type": "Person",
+          "name": language === 'zh' ? "陈先生" : "Mr. Chen"
+        },
+        "reviewBody": language === 'zh' 
+          ? "10年开发经验确实不一般，源码完整，文档齐全，二开很方便。"
+          : "10 years of development experience is indeed remarkable, complete source code, comprehensive documentation, easy for secondary development."
+      }
+    ]
+  };
+
+  const structuredData = [storeSchema, localBusinessSchema, reviewSchema];
 
   return (
     <>

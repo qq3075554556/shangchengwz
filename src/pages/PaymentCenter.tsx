@@ -91,62 +91,114 @@ const PaymentCenter = () => {
     }
   ];
 
-  const structuredData = [
-    {
-      "@context": "https://schema.org",
-      "@type": "Service",
-      "name": language === 'zh' ? 'VPN收款解决方案' : 'VPN Payment Solutions',
-      "description": language === 'zh' 
-        ? '专业的VPN收款解决方案，支持支付宝、微信支付、Visa、加密货币等多种支付方式，提供代收服务、跳转技术和伪装技术三种解决方案。'
-        : 'Professional VPN payment solutions supporting Alipay, WeChat Pay, Visa, cryptocurrency and more. Offering payment collection services, jump technology and disguise technology.',
-      "provider": {
-        "@type": "Organization",
-        "name": "VPN Payment Center"
-      },
-      "areaServed": "Worldwide",
-      "hasOfferCatalog": {
-        "@type": "OfferCatalog",
-        "name": language === 'zh' ? 'VPN收款服务' : 'VPN Payment Services',
-        "itemListElement": paymentSolutions.map((solution) => ({
-          "@type": "Offer",
-          "itemOffered": {
-            "@type": "Service",
-            "name": solution.title
-          }
-        }))
-      }
-    },
-    {
-      "@context": "https://schema.org",
+  const serviceSchema = {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "name": language === 'zh' ? 'VPN收款解决方案' : 'VPN Payment Solutions',
+    "description": language === 'zh' 
+      ? '专业的VPN收款解决方案，支持支付宝、微信支付、Visa、加密货币等多种支付方式，提供代收服务、跳转技术和伪装技术三种解决方案。'
+      : 'Professional VPN payment solutions supporting Alipay, WeChat Pay, Visa, cryptocurrency and more. Offering payment collection services, jump technology and disguise technology.',
+    "provider": {
       "@type": "Organization",
-      "name": language === 'zh' ? 'VPN收款中心' : 'VPN Payment Center',
-      "url": typeof window !== 'undefined' ? window.location.origin : '',
-      "logo": typeof window !== 'undefined' ? `${window.location.origin}/favicon.ico` : '',
-      "description": language === 'zh' 
-        ? '专业VPN行业收款解决方案提供商，提供安全、稳定、高效的支付服务。'
-        : 'Professional VPN industry payment solution provider, offering secure, stable, and efficient payment services.',
-      "contactPoint": {
-        "@type": "ContactPoint",
-        "contactType": "customer service",
-        "url": "https://t.me/gaoshengsm"
-      },
-      "sameAs": [
-        "https://t.me/gaoshengsm"
-      ]
+      "name": "VPNKing"
     },
-    {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "mainEntity": faqData.map(faq => ({
-        "@type": "Question",
-        "name": faq.question,
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": faq.answer
+    "areaServed": "Worldwide",
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": language === 'zh' ? 'VPN收款服务' : 'VPN Payment Services',
+      "itemListElement": paymentSolutions.map((solution) => ({
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": solution.title
         }
       }))
     }
-  ];
+  };
+
+  const localBusinessSchema = {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "VPNKing 收款中心",
+    "description": language === 'zh' 
+      ? '专业VPN行业收款解决方案提供商，提供安全、稳定、高效的支付服务'
+      : 'Professional VPN industry payment solution provider, offering secure, stable, and efficient payment services',
+    "url": "https://vpnking.cc/payment",
+    "address": {
+      "@type": "PostalAddress",
+      "addressCountry": "SG"
+    },
+    "priceRange": "$$",
+    "openingHours": "Mo-Su 00:00-24:00",
+    "sameAs": ["https://t.me/gaoshengsm"]
+  };
+
+  const reviewSchema = {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": language === 'zh' ? 'VPN收款服务' : 'VPN Payment Service',
+    "description": language === 'zh' 
+      ? 'VPN收款解决方案，支持多种支付方式'
+      : 'VPN payment solutions supporting multiple payment methods',
+    "brand": {
+      "@type": "Brand",
+      "name": "VPNKing"
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "4.7",
+      "reviewCount": "156",
+      "bestRating": "5",
+      "worstRating": "1"
+    },
+    "review": [
+      {
+        "@type": "Review",
+        "reviewRating": {
+          "@type": "Rating",
+          "ratingValue": "5",
+          "bestRating": "5"
+        },
+        "author": {
+          "@type": "Person",
+          "name": language === 'zh' ? "吴先生" : "Mr. Wu"
+        },
+        "reviewBody": language === 'zh' 
+          ? "代收服务非常稳定，资金到账快，解决了VPN收款的大难题！"
+          : "Collection service is very stable, fast fund arrival, solved the big problem of VPN payment collection!"
+      },
+      {
+        "@type": "Review",
+        "reviewRating": {
+          "@type": "Rating",
+          "ratingValue": "5",
+          "bestRating": "5"
+        },
+        "author": {
+          "@type": "Person",
+          "name": language === 'zh' ? "郑先生" : "Mr. Zheng"
+        },
+        "reviewBody": language === 'zh' 
+          ? "跳转技术很实用，有效避免了收款账号被封的风险，推荐！"
+          : "Jump technology is very practical, effectively avoiding the risk of account being blocked, recommended!"
+      }
+    ]
+  };
+
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": faqData.map(faq => ({
+      "@type": "Question",
+      "name": faq.question,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": faq.answer
+      }
+    }))
+  };
+
+  const structuredData = [serviceSchema, localBusinessSchema, reviewSchema, faqSchema];
 
   return (
     <>

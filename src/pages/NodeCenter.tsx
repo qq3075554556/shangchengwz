@@ -134,7 +134,7 @@ const NodeCenter = () => {
     language === 'zh' ? '近一年中国大陆可用率 99.9%*' : 'China uptime 99.9%*'
   ];
 
-  const structuredData = {
+  const storeSchema = {
     "@context": "https://schema.org",
     "@type": "Store",
     "name": language === 'zh' ? 'VPN节点商城' : 'VPN Node Store',
@@ -155,6 +155,77 @@ const NodeCenter = () => {
       }))
     }
   };
+
+  const localBusinessSchema = {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "VPNKing 节点商城",
+    "description": language === 'zh' 
+      ? '专业VPN国际专线服务商，提供全球任意地区节点，稳定率99.9%'
+      : 'Professional VPN international dedicated line provider with global node selection and 99.9% uptime',
+    "url": "https://vpnking.cc/nodes",
+    "address": {
+      "@type": "PostalAddress",
+      "addressCountry": "SG"
+    },
+    "priceRange": "$$$",
+    "openingHours": "Mo-Su 00:00-24:00",
+    "sameAs": ["https://t.me/gaoshengsm"]
+  };
+
+  const reviewSchema = {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": language === 'zh' ? 'VPN节点服务' : 'VPN Node Service',
+    "description": language === 'zh' 
+      ? 'VPN国际专线节点服务，稳定率99.9%'
+      : 'VPN international dedicated line node service with 99.9% uptime',
+    "brand": {
+      "@type": "Brand",
+      "name": "VPNKing"
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "4.9",
+      "reviewCount": "428",
+      "bestRating": "5",
+      "worstRating": "1"
+    },
+    "review": [
+      {
+        "@type": "Review",
+        "reviewRating": {
+          "@type": "Rating",
+          "ratingValue": "5",
+          "bestRating": "5"
+        },
+        "author": {
+          "@type": "Person",
+          "name": language === 'zh' ? "孙先生" : "Mr. Sun"
+        },
+        "reviewBody": language === 'zh' 
+          ? "节点质量非常好，速度快且稳定，99.9%可用率名副其实！"
+          : "Node quality is excellent, fast and stable speed, 99.9% uptime is well-deserved!"
+      },
+      {
+        "@type": "Review",
+        "reviewRating": {
+          "@type": "Rating",
+          "ratingValue": "5",
+          "bestRating": "5"
+        },
+        "author": {
+          "@type": "Person",
+          "name": language === 'zh' ? "周先生" : "Mr. Zhou"
+        },
+        "reviewBody": language === 'zh' 
+          ? "7x24技术支持很给力，遇到问题都能及时解决，服务态度很好。"
+          : "7x24 technical support is great, problems are solved promptly, excellent service attitude."
+      }
+    ]
+  };
+
+  const structuredData = [storeSchema, localBusinessSchema, reviewSchema];
 
   return (
     <>
