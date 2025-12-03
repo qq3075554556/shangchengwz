@@ -66,18 +66,24 @@ export const SEO = ({
 
     // Structured Data (JSON-LD)
     if (structuredData) {
-      // Remove existing scripts
-      document.querySelectorAll('script[type="application/ld+json"]').forEach(el => el.remove());
+      // Remove only SEO component's scripts (identified by data attribute)
+      document.querySelectorAll('script[data-seo-component="true"]').forEach(el => el.remove());
       
       // Handle array of structured data
       const dataArray = Array.isArray(structuredData) ? structuredData : [structuredData];
-      dataArray.forEach((data) => {
+      dataArray.forEach((data, index) => {
         const script = document.createElement('script');
         script.type = 'application/ld+json';
+        script.setAttribute('data-seo-component', 'true');
         script.textContent = JSON.stringify(data);
         document.head.appendChild(script);
       });
     }
+
+    // Cleanup on unmount
+    return () => {
+      document.querySelectorAll('script[data-seo-component="true"]').forEach(el => el.remove());
+    };
   }, [title, description, keywords, ogImage, canonical, structuredData]);
 
   return null;
