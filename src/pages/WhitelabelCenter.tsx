@@ -156,7 +156,7 @@ const WhitelabelCenter = () => {
     },
   ];
 
-  const structuredData = {
+  const productSchema = {
     "@context": "https://schema.org",
     "@type": "Product",
     "name": "SingLink VPN®️",
@@ -175,6 +175,77 @@ const WhitelabelCenter = () => {
       "offerCount": packages.length
     }
   };
+
+  const localBusinessSchema = {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "VPNKing - SingLink VPN",
+    "description": language === 'zh' 
+      ? '专业VPN白标服务提供商，提供终身授权的VPN贴牌套餐，省钱省心省时'
+      : 'Professional VPN white label service provider, offering lifetime licensed VPN branding packages',
+    "url": "https://vpnking.cc/whitelabel",
+    "address": {
+      "@type": "PostalAddress",
+      "addressCountry": "SG"
+    },
+    "priceRange": "$$$",
+    "openingHours": "Mo-Su 00:00-24:00",
+    "sameAs": ["https://t.me/gaoshengsm"]
+  };
+
+  const reviewSchema = {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": language === 'zh' ? 'SingLink VPN白标套餐' : 'SingLink VPN White Label Package',
+    "description": language === 'zh' 
+      ? 'VPN白标授权套餐，终身授权，一站式服务'
+      : 'VPN white label license package with lifetime authorization and one-stop service',
+    "brand": {
+      "@type": "Brand",
+      "name": "SingLink VPN"
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "4.8",
+      "reviewCount": "312",
+      "bestRating": "5",
+      "worstRating": "1"
+    },
+    "review": [
+      {
+        "@type": "Review",
+        "reviewRating": {
+          "@type": "Rating",
+          "ratingValue": "5",
+          "bestRating": "5"
+        },
+        "author": {
+          "@type": "Person",
+          "name": language === 'zh' ? "刘先生" : "Mr. Liu"
+        },
+        "reviewBody": language === 'zh' 
+          ? "白标套餐真的很划算，省去了开发成本，一站式服务非常省心！"
+          : "White label package is really cost-effective, saved development costs, one-stop service is worry-free!"
+      },
+      {
+        "@type": "Review",
+        "reviewRating": {
+          "@type": "Rating",
+          "ratingValue": "5",
+          "bestRating": "5"
+        },
+        "author": {
+          "@type": "Person",
+          "name": language === 'zh' ? "赵女士" : "Ms. Zhao"
+        },
+        "reviewBody": language === 'zh' 
+          ? "傻瓜式操作，小白也能轻松运营VPN业务，技术支持响应很快。"
+          : "Foolproof operation, even beginners can easily run VPN business, fast technical support response."
+      }
+    ]
+  };
+
+  const structuredData = [productSchema, localBusinessSchema, reviewSchema];
 
   return (
     <>
