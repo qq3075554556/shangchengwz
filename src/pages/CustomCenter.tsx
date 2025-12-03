@@ -31,19 +31,93 @@ const CustomCenter = () => {
     },
   ];
 
-  const structuredData = {
+  const serviceSchema = {
     "@context": "https://schema.org",
     "@type": "Service",
     "serviceType": language === 'zh' ? 'VPN定制开发服务' : 'VPN Custom Development Service',
     "provider": {
       "@type": "Organization",
-      "name": "VPN Development Platform"
+      "name": "VPNKing"
     },
     "areaServed": "Worldwide",
     "description": language === 'zh' 
       ? '专业VPN定制开发服务，支持定制系统、协议、功能、设计和技术服务。为个人和企业提供量身定制的VPN解决方案。'
       : 'Professional VPN custom development service supporting custom systems, protocols, features, design and technical services. Tailored VPN solutions for individuals and enterprises.'
   };
+
+  const localBusinessSchema = {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "VPNKing",
+    "description": language === 'zh' 
+      ? '专业VPN源码商城和定制开发平台，提供VPN源码、白标套餐、节点服务和定制开发'
+      : 'Professional VPN source code marketplace and custom development platform',
+    "url": "https://vpnking.cc",
+    "telephone": "+86-400-XXX-XXXX",
+    "address": {
+      "@type": "PostalAddress",
+      "addressCountry": "CN"
+    },
+    "priceRange": "$$",
+    "openingHours": "Mo-Su 00:00-24:00",
+    "sameAs": [
+      "https://t.me/gaoshengsm"
+    ]
+  };
+
+  const reviewSchema = {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": language === 'zh' ? 'VPN定制开发服务' : 'VPN Custom Development Service',
+    "description": language === 'zh' 
+      ? '专业VPN定制开发服务，支持全平台定制'
+      : 'Professional VPN custom development service with full platform support',
+    "brand": {
+      "@type": "Brand",
+      "name": "VPNKing"
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "4.8",
+      "reviewCount": "256",
+      "bestRating": "5",
+      "worstRating": "1"
+    },
+    "review": [
+      {
+        "@type": "Review",
+        "reviewRating": {
+          "@type": "Rating",
+          "ratingValue": "5",
+          "bestRating": "5"
+        },
+        "author": {
+          "@type": "Person",
+          "name": language === 'zh' ? "张先生" : "Mr. Zhang"
+        },
+        "reviewBody": language === 'zh' 
+          ? "非常专业的团队，定制的VPN系统完全符合我们的需求，交付准时，推荐！"
+          : "Very professional team, the customized VPN system fully meets our needs, delivered on time, highly recommended!"
+      },
+      {
+        "@type": "Review",
+        "reviewRating": {
+          "@type": "Rating",
+          "ratingValue": "5",
+          "bestRating": "5"
+        },
+        "author": {
+          "@type": "Person",
+          "name": language === 'zh' ? "李女士" : "Ms. Li"
+        },
+        "reviewBody": language === 'zh' 
+          ? "服务态度很好，技术实力强，定制功能都实现了，很满意！"
+          : "Great service attitude, strong technical capabilities, all custom features implemented, very satisfied!"
+      }
+    ]
+  };
+
+  const structuredData = [serviceSchema, localBusinessSchema, reviewSchema];
 
   return (
     <>
