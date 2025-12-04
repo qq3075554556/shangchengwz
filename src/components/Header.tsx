@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { Menu, X, Globe } from 'lucide-react';
+import { NavLink, Link } from 'react-router-dom';
+import { Globe } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useLanguage } from '@/contexts/LanguageContext';
 import {
@@ -11,7 +11,6 @@ import {
 } from '@/components/ui/dropdown-menu';
 
 export const Header = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { language, setLanguage, t } = useLanguage();
 
   const navItems = [
@@ -30,29 +29,20 @@ export const Header = () => {
   ];
 
   return (
-    <header className="fixed top-0 w-full z-50 backdrop-blur-md bg-background/80 border-b border-border">
-      <nav className="container mx-auto px-4 py-4">
-        <div className="flex items-center justify-between">
-          <Link to="/" className="text-2xl font-bold bg-gradient-primary bg-clip-text text-transparent">
-            TechService
-          </Link>
-
-          {/* Desktop Navigation */}
-          <div className="hidden xl:flex items-center gap-4">
-            {navItems.map((item) => (
-              <Link
-                key={item.path}
-                to={item.path}
-                className="text-foreground/80 hover:text-primary transition-colors text-sm whitespace-nowrap"
-              >
-                {item.label}
-              </Link>
-            ))}
+    <header className="fixed top-0 w-full z-50 backdrop-blur-md bg-background/90 border-b border-border shadow-sm">
+      <nav className="container mx-auto px-4 py-3">
+        <div className="flex flex-col items-center gap-3">
+          {/* Logo and Language Switcher Row */}
+          <div className="flex items-center justify-between w-full">
+            <Link to="/" className="text-xl font-bold bg-gradient-primary bg-clip-text text-transparent">
+              TechService
+            </Link>
 
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <Button variant="ghost" size="icon">
-                  <Globe className="h-5 w-5" />
+                <Button variant="ghost" size="sm" className="gap-2">
+                  <Globe className="h-4 w-4" />
+                  <span className="text-xs">{language === 'zh' ? '中文' : 'EN'}</span>
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent className="bg-card border-border">
@@ -66,49 +56,26 @@ export const Header = () => {
             </DropdownMenu>
           </div>
 
-          {/* Mobile Menu Button */}
-          <div className="xl:hidden flex items-center gap-2">
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button variant="ghost" size="icon">
-                  <Globe className="h-5 w-5" />
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent className="bg-card border-border">
-                <DropdownMenuItem onClick={() => setLanguage('zh')}>
-                  中文 {language === 'zh' && '✓'}
-                </DropdownMenuItem>
-                <DropdownMenuItem onClick={() => setLanguage('en')}>
-                  English {language === 'en' && '✓'}
-                </DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
-            
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-            >
-              {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-            </Button>
+          {/* Navigation Links - Centered and Responsive */}
+          <div className="flex flex-wrap items-center justify-center gap-x-2 gap-y-1 sm:gap-x-3 md:gap-x-4">
+            {navItems.map((item) => (
+              <NavLink
+                key={item.path}
+                to={item.path}
+                end={item.path === '/'}
+                className={({ isActive }) =>
+                  `text-xs sm:text-sm px-2 py-1.5 rounded-md transition-all duration-200 whitespace-nowrap ${
+                    isActive
+                      ? 'bg-primary/15 text-primary font-medium'
+                      : 'text-foreground/70 hover:text-primary hover:bg-primary/5'
+                  }`
+                }
+              >
+                {item.label}
+              </NavLink>
+            ))}
           </div>
         </div>
-
-        {/* Mobile Menu */}
-        {isMenuOpen && (
-          <div className="xl:hidden mt-4 py-4 space-y-3 border-t border-border">
-            {navItems.map((item) => (
-              <Link
-                key={item.path}
-                to={item.path}
-                className="block text-foreground/80 hover:text-primary transition-colors py-2"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                {item.label}
-              </Link>
-            ))}
-          </div>
-        )}
       </nav>
     </header>
   );
