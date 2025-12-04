@@ -1,6 +1,5 @@
-import { useState } from 'react';
 import { NavLink, Link } from 'react-router-dom';
-import { Globe } from 'lucide-react';
+import { Globe, ChevronDown } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useLanguage } from '@/contexts/LanguageContext';
 import {
@@ -13,7 +12,8 @@ import {
 export const Header = () => {
   const { language, setLanguage, t } = useLanguage();
 
-  const navItems = [
+  // 主要导航项（始终显示）
+  const mainNavItems = [
     { path: '/', label: t('home') },
     { path: '/source', label: t('sourceCenter') },
     { path: '/custom', label: t('customCenter') },
@@ -23,6 +23,10 @@ export const Header = () => {
     { path: '/listing', label: t('listingCenter') },
     { path: '/operations', label: t('operationsCenter') },
     { path: '/developer', label: t('developerCenter') },
+  ];
+
+  // 更多分组（收缩显示）
+  const moreNavItems = [
     { path: '/templates', label: t('templatesCenter') },
     { path: '/about', label: t('aboutUs') },
     { path: '/faq', label: t('faq') },
@@ -56,9 +60,9 @@ export const Header = () => {
             </DropdownMenu>
           </div>
 
-          {/* Navigation Links - Centered and Responsive */}
+          {/* Navigation Links - 主导航 + 更多分组 */}
           <div className="flex flex-wrap items-center justify-center gap-x-2 gap-y-1 sm:gap-x-3 md:gap-x-4">
-            {navItems.map((item) => (
+            {mainNavItems.map((item) => (
               <NavLink
                 key={item.path}
                 to={item.path}
@@ -74,6 +78,30 @@ export const Header = () => {
                 {item.label}
               </NavLink>
             ))}
+
+            {/* 更多分组下拉菜单 */}
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <button className="text-xs sm:text-sm px-2 py-1.5 rounded-md transition-all duration-200 whitespace-nowrap text-foreground/70 hover:text-primary hover:bg-primary/5 flex items-center gap-1">
+                  {language === 'zh' ? '更多' : 'More'}
+                  <ChevronDown className="h-3 w-3" />
+                </button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent className="bg-card border-border z-50">
+                {moreNavItems.map((item) => (
+                  <DropdownMenuItem key={item.path} asChild>
+                    <NavLink
+                      to={item.path}
+                      className={({ isActive }) =>
+                        `w-full ${isActive ? 'text-primary font-medium' : ''}`
+                      }
+                    >
+                      {item.label}
+                    </NavLink>
+                  </DropdownMenuItem>
+                ))}
+              </DropdownMenuContent>
+            </DropdownMenu>
           </div>
         </div>
       </nav>
